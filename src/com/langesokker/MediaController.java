@@ -1,5 +1,7 @@
 package com.langesokker;
 
+import com.langesokker.media.Media;
+
 public class MediaController {
     private static MediaController instance;
 
@@ -8,7 +10,7 @@ public class MediaController {
         return instance;
     }
     /**
-     * Tilføjer valgte film til en liste af film, som streamingtjenesten tilbyder
+     * Tilfoejer valgte film til en liste af film, som streamingtjenesten tilbyder
      */
     public void fillCollection(){
 
@@ -16,7 +18,7 @@ public class MediaController {
     }
 
     /**
-     * Tilføjer et medie m til listen af film
+     * Tilfoejer et medie m til listen af film
      */
     public void addMedia(Media m){
 
