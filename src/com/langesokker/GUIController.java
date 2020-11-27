@@ -2,6 +2,8 @@ package com.langesokker;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUIController {
     private static GUIController instance;
@@ -27,20 +29,30 @@ public class GUIController {
     public void setupGUI(){
         JPanel mainPanel = new JPanel();
 
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+        mainPanel.setLayout(new BorderLayout());
         Container topContainer = new Container();
-        topContainer.setLayout(new BoxLayout(topContainer, BoxLayout.PAGE_AXIS));
+        topContainer.setLayout(new GridLayout(1,2));
         Container contentContainer = new Container();
+        contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.PAGE_AXIS));
 
         JTextField searchbar = new JTextField();
         topContainer.add(searchbar);
 
 
-        JButton searchButton = new JButton("search");
+        JButton searchButton = new JButton("Search");
         topContainer.add(searchButton);
 
-        mainPanel.add(topContainer);
+        JButton someButton = new JButton("homdog");
+        someButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showConfirmDialog(frame, "HOMDOG!!!!");
+            }
+        });
+        contentContainer.add(someButton);
 
+        mainPanel.add(topContainer, BorderLayout.NORTH);
+        mainPanel.add(contentContainer, BorderLayout.CENTER);
         frame.add(mainPanel);
     }
 }
