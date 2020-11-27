@@ -1,5 +1,6 @@
 package com.langesokker;
 
+import com.langesokker.media.Film;
 import com.langesokker.media.Media;
 
 import java.io.*;
@@ -30,8 +31,9 @@ public class Reader {
             while ((CurrentLine = reader.readLine()) != null) {
                 System.out.println(CurrentLine);
 
+                String[] currentFilm = CurrentLine.split(";");
+                new Film(currentFilm[0], Integer.parseInt(currentFilm[1]), currentFilm[2].replaceAll("\\s+", "").split(","), Double.parseDouble(currentFilm[3]), "");
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

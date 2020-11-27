@@ -4,12 +4,12 @@ import java.util.List;
 
 public abstract class Media {
     protected String name;
-    protected List<String> genre;
+    protected String[] genre;
     protected int releaseDate;
     protected double rating;
     protected String description;
 
-    public Media(String name, int releaseData, List<String> genre, double rating, String description) {
+    public Media(String name, int releaseData, String[] genre, double rating, String description) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseData;
@@ -25,7 +25,7 @@ public abstract class Media {
         return releaseDate;
     }
 
-    public List<String> getGenre() {
+    public String[] getGenre() {
         return genre;
     }
 
@@ -41,7 +41,7 @@ public abstract class Media {
         this.description = description;
     }
 
-    public void setGenre(List<String> genre) {
+    public void setGenre(String[] genre) {
         this.genre = genre;
     }
 
