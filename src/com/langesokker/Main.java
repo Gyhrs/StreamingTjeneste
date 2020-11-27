@@ -4,6 +4,9 @@ public class Main {
 
     //Main Method that runs the entire project
     public static void main(String[] args) {
-        System.out.println("hallo");
+        GUIController guicontroller = GUIController.getInstance();
+        guicontroller.setupGUI();
+        guicontroller.display();
     }
+
 }
