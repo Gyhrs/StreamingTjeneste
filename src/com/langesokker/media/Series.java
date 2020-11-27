@@ -6,7 +6,7 @@ import java.util.Map;
 public class Series extends Media{
     Map<Integer, Integer> seasons;
 
-    public Series(String name, int releaseData,  List<String> genre, double rating, String description, Map<Integer, Integer> seasons){
+    public Series(String name, int releaseData,  String[] genre, double rating, String description, Map<Integer, Integer> seasons){
         super(name, releaseData, genre, rating, description);
     }
 
