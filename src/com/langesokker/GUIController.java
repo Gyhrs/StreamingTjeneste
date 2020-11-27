@@ -29,12 +29,17 @@ public class GUIController {
 
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
         Container topContainer = new Container();
+        topContainer.setLayout(new BoxLayout(topContainer, BoxLayout.PAGE_AXIS));
         Container contentContainer = new Container();
 
         JTextField searchbar = new JTextField();
         topContainer.add(searchbar);
 
 
+        JButton searchButton = new JButton("search");
+        topContainer.add(searchButton);
+
+        mainPanel.add(topContainer);
 
         frame.add(mainPanel);
     }
