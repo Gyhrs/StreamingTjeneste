@@ -5,14 +5,14 @@ import java.util.List;
 public abstract class Media {
     protected String name;
     protected List<String> genre;
-    protected int releaseData;
+    protected int releaseDate;
     protected double rating;
     protected String description;
 
-    public Media(String name, List<String> genre, int releaseData, double rating, String description) {
+    public Media(String name, int releaseData, List<String> genre, double rating, String description) {
         this.name = name;
         this.genre = genre;
-        this.releaseData = releaseData;
+        this.releaseDate = releaseData;
         this.rating = rating;
         this.description = description;
     }
@@ -21,8 +21,8 @@ public abstract class Media {
         return rating;
     }
 
-    public int getReleaseData() {
-        return releaseData;
+    public int getReleaseDate() {
+        return releaseDate;
     }
 
     public List<String> getGenre() {
@@ -53,8 +53,8 @@ public abstract class Media {
         this.rating = rating;
     }
 
-    public void setReleaseData(int releaseData) {
-        this.releaseData = releaseData;
+    public void setReleaseDate(int releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     @Override
@@ -62,7 +62,7 @@ public abstract class Media {
         return "Media{" +
                 "name=" + name +
                 ", genre='" + genre + '\'' +
-                ", releaseData=" + releaseData +
+                ", releaseData=" + releaseDate +
                 ", rating=" + rating +
                 ", description='" + description + '\'' +
                 '}';

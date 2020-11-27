@@ -20,7 +20,7 @@ public class MediaController {
     /**
      * Tilfoejer et medie m til listen af film
      */
-    public void addMedia(Media m){
+    public void addMedia(){
 
 
     }
@@ -28,7 +28,7 @@ public class MediaController {
     /**
      * Fjerner et medie m fra listen af film
      */
-    public void removeMedia(Media m){
+    public void removeMedia(){
 
 
     }
