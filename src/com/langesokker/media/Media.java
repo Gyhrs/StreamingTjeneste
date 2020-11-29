@@ -1,5 +1,6 @@
 package com.langesokker.media;
 
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Media {
@@ -9,10 +10,10 @@ public abstract class Media {
     protected double rating;
     protected String description;
 
-    public Media(String name, int releaseData, String[] genre, double rating, String description) {
+    public Media(String name, int releaseDate, String[] genre, double rating, String description) {
         this.name = name;
         this.genre = genre;
-        this.releaseDate = releaseData;
+        this.releaseDate = releaseDate;
         this.rating = rating;
         this.description = description;
     }
@@ -57,11 +58,14 @@ public abstract class Media {
         this.releaseDate = releaseDate;
     }
 
+    public abstract SupportedMediaTypes getType();
+
     @Override
     public String toString() {
         return "Media{" +
-                "name=" + name +
-                ", genre='" + genre + '\'' +
+                "type=" + getType() +
+                ", name=" + name +
+                ", genre='" + Arrays.toString(genre) + '\'' +
                 ", releaseData=" + releaseDate +
                 ", rating=" + rating +
                 ", description='" + description + '\'' +

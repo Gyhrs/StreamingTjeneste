@@ -4,9 +4,10 @@ public class Main {
 
     //Main Method that runs the entire project
     public static void main(String[] args) {
-        GUIController guicontroller = GUIController.getInstance();
+        /*GUIController guicontroller = GUIController.getInstance();
         guicontroller.setupGUI();
-        guicontroller.display();
+        guicontroller.display();*/
+        MediaController.getInstance().loadAllMediaTypes();
     }
 
 }
