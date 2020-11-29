@@ -41,6 +41,7 @@ public class GUIController {
 
         JButton searchButton = new JButton("Search");
         topContainer.add(searchButton);
+        //searchButton.addActionListener(//her skal den søge efter det der står i feltet);
 
         JButton someButton = new JButton("homdog");
         someButton.addActionListener(new ActionListener() {
@@ -51,8 +52,11 @@ public class GUIController {
         });
         contentContainer.add(someButton);
 
+
+
         mainPanel.add(topContainer, BorderLayout.NORTH);
         mainPanel.add(contentContainer, BorderLayout.CENTER);
         frame.add(mainPanel);
+
     }
 }
