@@ -8,8 +8,8 @@ public class Series extends Media{
     int endDate;
     boolean isStillRunning = false;
 
-    public Series(String name, int releaseDate, int endDate, boolean isStillRunning,  String[] genre, double rating, String description, Map<Integer, Integer> seasons){
-        super(name, releaseDate, genre, rating, description);
+    public Series(String name, int releaseDate, int endDate, boolean isStillRunning,  String[] genre, double rating, Map<Integer, Integer> seasons){
+        super(name, releaseDate, genre, rating);
         this.endDate = endDate;
         this.isStillRunning = isStillRunning;
     }

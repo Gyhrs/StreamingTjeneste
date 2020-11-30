@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUIController {
+
     private static GUIController instance;
     public JFrame frame;
+
     public GUIController(){
         frame = new JFrame("Lange sokker streaming");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -116,12 +116,12 @@ public class MediaController {
         try {
             String basePath = "src/com/langesokker/data/media/";
             reader = new BufferedReader(new FileReader(basePath + filename));
-            String CurrentLine;
-            while ((CurrentLine = reader.readLine()) != null) {
-                String[] currentLine = CurrentLine.split(";");
-                Media media = mediaType.toMedia(currentLine);
+            String currentLine;
+            while ((currentLine = reader.readLine()) != null) {
+                String[] arrayCurrentLine = currentLine.split(";");
+                Media media = mediaType.toMedia(arrayCurrentLine);
                 if(media == null){
-                    System.out.println("Failed loading " + currentLine[0] + ". Skipping...");
+                    System.out.println("Failed loading " + arrayCurrentLine[0] + ". Skipping...");
                     continue;
                 }
                 System.out.println(media.toString());

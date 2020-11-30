@@ -8,14 +8,12 @@ public abstract class Media {
     protected String[] genre;
     protected int releaseDate;
     protected double rating;
-    protected String description;
 
-    public Media(String name, int releaseDate, String[] genre, double rating, String description) {
+    public Media(String name, int releaseDate, String[] genre, double rating) {
         this.name = name;
         this.genre = genre;
         this.releaseDate = releaseDate;
         this.rating = rating;
-        this.description = description;
     }
 
     public double getRating() {
@@ -30,16 +28,8 @@ public abstract class Media {
         return genre;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public void setGenre(String[] genre) {
@@ -66,9 +56,8 @@ public abstract class Media {
                 "type=" + getType() +
                 ", name=" + name +
                 ", genre='" + Arrays.toString(genre) + '\'' +
-                ", releaseData=" + releaseDate +
+                ", release date=" + releaseDate +
                 ", rating=" + rating +
-                ", description='" + description + '\'' +
                 '}';
     }
 }
