@@ -7,7 +7,7 @@ Curb Your Enthusiasm; 2000-; Comedy; 8,7; 1-10, 2-10, 3-10, 4-10, 5-10, 6-10, 7-
 Lost; 2004-2010; Adventure, Drama, Fantasy; 8,4; 1-25, 2-24, 3-23, 4-14, 5-17, 6-18;
 Louie; 2010-2015; Comedy, Drama; 8,6; 1-13, 2-13, 3-13, 4-14, 5-8;
 Cheers; 1982-1993; Comedy, Drama; 7,8; 1-22, 2-22, 3-25, 4-26, 5-26, 6-25, 7-22, 8-26, 9-27, 10-26, 11-28;
-Scener ur ett �ktenskap; 1973; Drama; 8,5; 1-6;
+Scener ur ett äktenskap; 1973; Drama; 8,5; 1-6;
 Buffy The Vampire Slayer; 1996-2003; Action, Drama, Fantasy; 8,2; 1-12, 2-22, 3-22, 4-22, 5-22, 6-22, 7-22;
 The Shield; 2002-2008; Crime, Drama, Thriller; 8,7; 1-13, 2-13, 3-15, 4-13, 5-11, 6-10, 7-13;
 Deadwood; 2004-2006; Crime, Drama, History; 8,7; 1-12, 2-12, 3-12;
