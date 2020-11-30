@@ -93,7 +93,7 @@ public class GUIController {
                 JLabel title = new JLabel(media.getName());
                 rowContainer.add(title);
 
-                Graphics g = new Graphics();
+                //Graphics g = new Graphics();
 
                 item++;
             }
