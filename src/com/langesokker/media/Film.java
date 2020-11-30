@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Film extends Media{
 
-    public Film(String name, int releaseDate,  String[] genre, double rating, String description){
-        super(name, releaseDate, genre, rating, description);
+    public Film(String name, int releaseDate,  String[] genre, double rating){
+        super(name, releaseDate, genre, rating);
     }
 
     @Override
