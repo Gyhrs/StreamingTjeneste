@@ -6,6 +6,8 @@ import com.langesokker.media.SupportedMediaTypes;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -62,10 +64,13 @@ public class MediaController {
      * Brug denne methode til at få det tilhørene billede til mediet, hvis billedet findes.
      * @return = BufferedImage ud fra /data/images/[mediaType]/[mediaNavn].jpg Kan returnere null hvis intet billed findes.
      */
-    public BufferedImage getMediaImage(Media media){
-        InputStream in = getClass().getResourceAsStream("src/com/langesokker/(data/images/" + media.getType().getImageFolderName() + media.getName() + ".jpg");
+    public BufferedImage getMediaImage(Media media) {
+        String path = "com/langesokker/data/images/" + media.getType().getImageFolderName() + "/" + media.getName() + ".jpg";
+        System.out.println(path);
+        InputStream is = getClass().getClassLoader().getResourceAsStream(path);
+        //if(is == null) return null;
         try {
-            return ImageIO.read(in);
+            return ImageIO.read(is);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -105,11 +110,6 @@ public class MediaController {
             // TODO: make it throw exception...
             return;
         }
-        ClassLoader loader = getClass().getClassLoader();
-        if (loader == null) {
-            // TODO: make it throw exception...
-            return;
-        }
 
         BufferedReader reader = null;
         try {
@@ -123,7 +123,7 @@ public class MediaController {
                     System.out.println("Failed loading " + arrayCurrentLine[0] + ". Skipping...");
                     continue;
                 }
-                System.out.println(media.toString());
+                //System.out.println(media.toString());
                 addMedia(media);
             }
         } catch (IOException e) {

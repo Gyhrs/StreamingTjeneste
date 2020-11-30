@@ -1,6 +1,7 @@
 package com.langesokker;
 
 import com.langesokker.media.Media;
+import com.langesokker.views.MediaView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ public class GUIController {
 
     private final MediaController mediaController = MediaController.getInstance();
 
-    public JFrame frame;
+    private final JFrame frame;
 
     public GUIController(){
         frame = new JFrame("Lange sokker streaming");
@@ -23,11 +24,8 @@ public class GUIController {
     }
 
     public static GUIController getInstance(){
-            if(instance == null) {
-                    instance = new GUIController();
-            }
-            return instance;
-
+        if (instance == null)  instance = new GUIController();
+        return instance;
     }
 
     public void display(){
@@ -37,6 +35,7 @@ public class GUIController {
 
     public void setupGUI(){
         frame.setMinimumSize(new Dimension(500, 300));
+        frame.setPreferredSize(new Dimension(1920, 1000));
         JPanel mainPanel = new JPanel();
 
         mainPanel.setLayout(new BorderLayout());
@@ -64,7 +63,7 @@ public class GUIController {
             }
         });
         contentContainer.add(someButton);*/
-        contentContainer.add(updateContentContainer(""));
+        contentContainer.add(updateContentContainer());
 
 
         mainPanel.add(topContainer, BorderLayout.NORTH);
@@ -73,10 +72,12 @@ public class GUIController {
 
     }
 
+    private JScrollPane updateContentContainer(){
+        return updateContentContainer("");
+    }
+
     private JScrollPane updateContentContainer(String query){
         int item = 0;
-
-
         Container container = new Container();
         container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
         Container rowContainer = new Container();
@@ -89,11 +90,7 @@ public class GUIController {
                     rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
                 }
-
-                JLabel title = new JLabel(media.getName());
-                rowContainer.add(title);
-
-                //Graphics g = new Graphics();
+                rowContainer.add(new MediaView(media.getName(), mediaController.getMediaImage(media)).getComponent());
 
                 item++;
             }
