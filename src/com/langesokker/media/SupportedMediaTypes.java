@@ -18,7 +18,7 @@ public enum SupportedMediaTypes {
         int releaseDate;
         try {
             releaseDate = Integer.parseInt(data[1].replaceAll("\\s+", ""));
-        }catch (NumberFormatException e){
+        } catch (NumberFormatException e) {
             System.out.println(data[1] + " is not a number");
             System.out.println(e.getMessage());
             return null;
@@ -29,7 +29,7 @@ public enum SupportedMediaTypes {
             NumberFormat format = NumberFormat.getInstance(Locale.FRANCE); //Brug , i stedet for .
             Number number = format.parse(data[3].replaceAll("\\s+", ""));
             rating = number.doubleValue();
-        }catch (NumberFormatException | ParseException e){
+        } catch (NumberFormatException | ParseException e) {
             System.out.println(data[3] + " is not a number");
             System.out.println(e.getMessage());
             return null;
@@ -38,11 +38,14 @@ public enum SupportedMediaTypes {
     }),
     SERIES("series", data -> {
         String name = data[0];
-        String[] dates = data[1].replaceAll("\\s+", "").split("-");
 
+        String[] dates = data[1].replaceAll("\\s+", "").split("-");
         int releaseDate;
         int endDate = 0;
         boolean isStillRunning = true;
+        /**
+         * TODO: Hvad nu hvis der kun "1954-"
+         */
         try {
             releaseDate = Integer.parseInt(dates[0]);
             if(dates.length > 1){
@@ -66,6 +69,7 @@ public enum SupportedMediaTypes {
             return null;
         }
         Map<Integer, Integer> seasons = new HashMap<>();
+
         for(String season : data[4].replaceAll("\\s+", "").split(",")){
             String[] split = season.split("-");
             if(split.length <= 1) continue; //Not enough data.
@@ -79,6 +83,7 @@ public enum SupportedMediaTypes {
         }
         return new Series(name, releaseDate, endDate, isStillRunning, genres, rating, "", seasons);
     });
+
 
     /**
      * Koden til at generere den specifikke medie type

@@ -3,11 +3,9 @@ package com.langesokker;
 import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,12 +23,6 @@ public class MediaController {
     public static MediaController getInstance() {
         if(instance == null) instance = new MediaController();
         return instance;
-    }
-    /**
-     * Tilfoejer valgte film til en liste af film, som streamingtjenesten tilbyder
-     */
-    public void fillCollection(){
-
     }
 
     /**
@@ -71,11 +63,18 @@ public class MediaController {
      * @return = BufferedImage ud fra /data/images/[mediaType]/[mediaNavn].jpg Kan returnere null hvis intet billed findes.
      */
     public BufferedImage getMediaImage(Media media){
+        InputStream in = getClass().getResourceAsStream("src/com/langesokker/(data/images/" + media.getType().getImageFolderName() + media.getName() + ".jpg");
+        try {
+            return ImageIO.read(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return null;
     }
 
     /**
      * Denne funktion går igennem alle filerne i /data/media/ mappen og indlæser dem med MediaController#loadFile(String fileName) funktionen.
+     * TODO: Replace new file()
      */
     public void loadAllMediaTypes(){
         File mediaDirectory = new File("src/com/langesokker/data/media");
