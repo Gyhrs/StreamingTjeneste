@@ -1,4 +1,4 @@
-package com.langesokker;
+package com.langesokker.controllers;
 
 import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
@@ -6,8 +6,6 @@ import com.langesokker.media.SupportedMediaTypes;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;

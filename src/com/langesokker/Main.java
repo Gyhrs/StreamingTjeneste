@@ -1,5 +1,8 @@
 package com.langesokker;
 
+import com.langesokker.controllers.GUIController;
+import com.langesokker.controllers.MediaController;
+
 public class Main {
 
     //Main Method that runs the entire project
