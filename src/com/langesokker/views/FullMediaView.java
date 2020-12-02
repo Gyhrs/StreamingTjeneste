@@ -22,32 +22,32 @@ public class FullMediaView extends BaseView {
         super(frame);
         this.media = media;
     }
+
     /**
      *
      */
     @Override
     public Container getContainer() {
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
-        mainPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        Container imageContainer = new Container();
-        Container infoContainer = new Container();
+        mainPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        JPanel imagePanel = new JPanel();
+        JPanel infoPanel = new JPanel();
 
-        imageContainer.setLayout(new BoxLayout(imageContainer, BoxLayout.PAGE_AXIS));
-        infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.Y_AXIS));
-        imageContainer.add(new JLabel(new ImageIcon(mediaController.getMediaImage(media))));
+        imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.Y_AXIS));
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
+
+        imagePanel.add(new JLabel(new ImageIcon(mediaController.getMediaImage(media))));
         BufferedImage playIcon = ImageUtils.getImage("assets/play_icon_transparent.png");
         if(playIcon != null){
-            playIcon = ImageUtils.resize(playIcon, 100, 100);
-            imageContainer.add(new JLabel(new ImageIcon(playIcon)));
+            playIcon = ImageUtils.resize(playIcon, 70, 70);
+            imagePanel.add(new JLabel(new ImageIcon(playIcon)));
         }
 
-        JText title = new JText("Title: " + media.getName(), 50, true);
-        title.setAlignmentY(Component.TOP_ALIGNMENT);
-        infoContainer.add(title);
-        infoContainer.add(new JText("SomeDescription", 30));
-        infoContainer.add(new JText("Genre: " + media.genresToString(), 20));
-        infoContainer.add(new JText("Rating: " + media.getRating(), 20, true));
+        infoPanel.add(new JText("Title: " + media.getName(), 50, true));
+        infoPanel.add(new JText("SomeDescription", 30));
+        infoPanel.add(new JText("Genre: " + media.genresToString(), 20));
+        infoPanel.add(new JText("Rating: " + media.getRating(), 20, true));
+
         JButton backButton = new JButton("Back");
         backButton.addActionListener(new ActionListener() {
             @Override
@@ -55,9 +55,10 @@ public class FullMediaView extends BaseView {
                 guiController.setView(guiController.getFrontPage().getContainer());
             }
         });
-        infoContainer.add(backButton);
-        mainPanel.add(imageContainer);
-        mainPanel.add(infoContainer);
+        infoPanel.add(backButton);
+
+        mainPanel.add(imagePanel);
+        mainPanel.add(infoPanel);
 
         return mainPanel;
     }
