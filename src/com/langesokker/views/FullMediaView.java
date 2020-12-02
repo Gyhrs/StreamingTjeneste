@@ -29,13 +29,14 @@ public class FullMediaView extends BaseView {
     @Override
     public Container getContainer() {
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new FlowLayout(FlowLayout.LEADING));
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
         JPanel imagePanel = new JPanel();
         JPanel infoPanel = new JPanel();
 
         imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.Y_AXIS));
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-
+        imagePanel.setAlignmentY(Component.TOP_ALIGNMENT);
+        infoPanel.setAlignmentY(Component.TOP_ALIGNMENT);
         imagePanel.add(new JLabel(new ImageIcon(mediaController.getMediaImage(media))));
         BufferedImage playIcon = ImageUtils.getImage("assets/play_icon_transparent.png");
         if(playIcon != null){
@@ -49,12 +50,7 @@ public class FullMediaView extends BaseView {
         infoPanel.add(new JText("Rating: " + media.getRating(), 20, true));
 
         JButton backButton = new JButton("Back");
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                guiController.setView(guiController.getFrontPage().getContainer());
-            }
-        });
+        backButton.addActionListener(e -> guiController.setView(guiController.getFrontPage().getContainer()));
         infoPanel.add(backButton);
 
         mainPanel.add(imagePanel);
