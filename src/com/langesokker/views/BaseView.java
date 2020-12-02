@@ -1,6 +1,7 @@
 package com.langesokker.views;
 
 import javax.swing.*;
+import java.awt.*;
 
 public abstract class BaseView {
 
@@ -13,4 +14,6 @@ public abstract class BaseView {
     public JFrame getFrame() {
         return frame;
     }
+
+    public abstract Component getComponent();
 }
