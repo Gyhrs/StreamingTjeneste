@@ -4,6 +4,7 @@ import com.langesokker.media.Media;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.Flow;
 
 public class FullMediaView extends BaseView {
 
@@ -16,6 +17,12 @@ public class FullMediaView extends BaseView {
 
     @Override
     public Component getComponent() {
-        return null;
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        Container imageContainer = new Container();
+        Container infoContainer = new Container();
+        imageContainer.setLayout(new BoxLayout(imageContainer, BoxLayout.PAGE_AXIS));
+        infoContainer.setLayout(new BoxLayout(infoContainer, BoxLayout.PAGE_AXIS));
+        return mainPanel;
     }
 }
