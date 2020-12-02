@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class MediaView extends BaseView{
+public class MediaItemView extends BaseView{
 
     String name;
     BufferedImage image;
 
-    public MediaView(JFrame frame, String name, BufferedImage image){
+    public MediaItemView(JFrame frame, String name, BufferedImage image){
         super(frame);
         this.name = name;
         this.image = image;

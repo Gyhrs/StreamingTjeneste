@@ -1,7 +1,7 @@
 package com.langesokker.controllers;
 
 import com.langesokker.media.Media;
-import com.langesokker.views.MediaView;
+import com.langesokker.views.MediaItemView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -87,7 +87,7 @@ public class GUIController {
                     rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
                 }
-                rowContainer.add(new MediaView(frame, media.getName(), mediaController.getMediaImage(media)).getComponent());
+                rowContainer.add(new MediaItemView(frame, media.getName(), mediaController.getMediaImage(media)).getComponent());
 
                 item++;
             }
