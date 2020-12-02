@@ -5,6 +5,8 @@ import com.langesokker.views.MediaItemView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class GUIController {
@@ -50,7 +52,18 @@ public class GUIController {
         searchButton.setPreferredSize(new Dimension(100, 20));
 
         topContainer.add(searchButton);
-        //searchButton.addActionListener(//her skal den søge efter det der står i feltet);
+        searchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String query = searchbar.getText();
+
+                contentContainer.remove(0);
+                contentContainer.add(updateContentContainer(query));
+                mainPanel.revalidate();
+                mainPanel.repaint();
+
+            }
+        });
 
         /*JButton someButton = new JButton("homdog");
         someButton.addActionListener(new ActionListener() {
@@ -81,6 +94,9 @@ public class GUIController {
         rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
         for(List<Media> mediaList : mediaController.getMediaMap().values()){
             for (Media media : mediaList){
+                if(!media.getName().toLowerCase().contains(query.toLowerCase()) && !query.equals("")){
+                    continue;
+                }
                 if(item % 5 == 0){
                     container.add(rowContainer);
                     rowContainer = new Container();
@@ -92,11 +108,11 @@ public class GUIController {
                 item++;
             }
         }
-        if((item-1) % 5 != 0){
+
             container.add(rowContainer);
-        }
+
         JScrollPane scrollPane = new JScrollPane(container, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(7);
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         return scrollPane;
     }
 }
