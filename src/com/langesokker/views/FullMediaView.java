@@ -22,7 +22,9 @@ public class FullMediaView extends BaseView {
         super(frame);
         this.media = media;
     }
-
+    /**
+     *
+     */
     @Override
     public Container getContainer() {
         JPanel mainPanel = new JPanel();

@@ -59,7 +59,9 @@ public abstract class Media {
                 ", release date=" + releaseDate +
                 ", rating=" + rating +
                 '}';
-    }
+    } /**
+        * Samler alle genre fra genre arrayet og sætter , + mellemrum imellem hver string fra arrayet
+     */
     public String genresToString(){
         StringJoiner sj = new StringJoiner(", ");
 

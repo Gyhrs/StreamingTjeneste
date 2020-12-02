@@ -7,7 +7,7 @@ public class JText extends JLabel {
 
     private int fontSize;
     private boolean isBold = false;
-    String fontName = "Comic Sans MS";
+    String fontName = "Times New Roman";
 
     public JText(String text){
         super(text);
@@ -39,7 +39,9 @@ public class JText extends JLabel {
     public void setBold(boolean bold) {
         isBold = bold;
     }
-
+    /**
+     * Skaber en generel font for beskrivelserne af hvert medie, efter er medie er blevet valgt
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Font defaultFont = super.getFont();

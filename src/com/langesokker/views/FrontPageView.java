@@ -65,11 +65,15 @@ public class FrontPageView extends BaseView{
         return mainPanel;
 
 
-    }
+    } /**
+     * Updaterer hele panelet ud fra
+     */
     private JScrollPane updateContentContainer(){
         return updateContentContainer(query);
     }
-
+    /**
+     * Updaterer containeren af medier baseret på den string af karakterer man søger efter
+     */
     private JScrollPane updateContentContainer(String query){
         int item = 0;
         Container container = new Container();

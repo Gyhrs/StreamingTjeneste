@@ -28,12 +28,14 @@ public class GUIController {
         if (instance == null)  instance = new GUIController();
         return instance;
     }
-
+    /**
+     * Synliggør framen og samler de diverse komponenter til at blive
+     * */
     public void display(){
         frame.pack();
         frame.setVisible(true);
     }
-
+    /** Laver en base-størrelse for GUI'ens frame */
     public void setupGUI(){
         frame.setMinimumSize(new Dimension(500, 300));
         frame.setPreferredSize(new Dimension(1920, 1000));
