@@ -15,5 +15,5 @@ public abstract class BaseView {
         return frame;
     }
 
-    public abstract Component getComponent();
+    public abstract Container getContainer();
 }

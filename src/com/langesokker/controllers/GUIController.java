@@ -15,12 +15,13 @@ public class GUIController {
     private static GUIController instance;
 
     private final MediaController mediaController = MediaController.getInstance();
-
     private final JFrame frame;
+    private final FrontPageView frontPage;
 
     public GUIController(){
         frame = new JFrame("Lange sokker streaming");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frontPage = new FrontPageView(frame);
     }
 
     public static GUIController getInstance(){
@@ -37,9 +38,17 @@ public class GUIController {
         frame.setMinimumSize(new Dimension(500, 300));
         frame.setPreferredSize(new Dimension(1920, 1000));
 
-        frame.add(new FrontPageView(frame).getComponent());
+        frame.add(frontPage.getContainer());
 
     }
 
+    public void setView(Container container){
+        frame.setContentPane(container);
+        frame.revalidate();
+        frame.repaint();
+    }
 
+    public FrontPageView getFrontPage() {
+        return frontPage;
+    }
 }

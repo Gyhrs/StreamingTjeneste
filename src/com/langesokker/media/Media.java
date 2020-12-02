@@ -1,17 +1,17 @@
 package com.langesokker.media;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.StringJoiner;
 
 public abstract class Media {
     protected String name;
-    protected String[] genre;
+    protected String[] genres;
     protected int releaseDate;
     protected double rating;
 
     public Media(String name, int releaseDate, String[] genre, double rating) {
         this.name = name;
-        this.genre = genre;
+        this.genres = genre;
         this.releaseDate = releaseDate;
         this.rating = rating;
     }
@@ -24,16 +24,16 @@ public abstract class Media {
         return releaseDate;
     }
 
-    public String[] getGenre() {
-        return genre;
+    public String[] getGenres() {
+        return genres;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setGenre(String[] genre) {
-        this.genre = genre;
+    public void setGenres(String[] genres) {
+        this.genres = genres;
     }
 
     public void setName(String name) {
@@ -55,9 +55,19 @@ public abstract class Media {
         return "Media{" +
                 "type=" + getType() +
                 ", name=" + name +
-                ", genre='" + Arrays.toString(genre) + '\'' +
+                ", genre='" + Arrays.toString(genres) + '\'' +
                 ", release date=" + releaseDate +
                 ", rating=" + rating +
                 '}';
+    }
+    public String genresToString(){
+        StringJoiner sj = new StringJoiner(", ");
+
+        //Alternative: Arrays.stream(genres).forEach(sj::add);
+
+        for(String s1 : genres){
+            sj.add(s1);
+        }
+        return sj.toString();
     }
 }

@@ -2,6 +2,7 @@ package com.langesokker.controllers;
 
 import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
+import com.langesokker.utils.ImageUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -63,16 +64,7 @@ public class MediaController {
      * @return = BufferedImage ud fra /data/images/[mediaType]/[mediaNavn].jpg Kan returnere null hvis intet billed findes.
      */
     public BufferedImage getMediaImage(Media media) {
-        String path = "com/langesokker/data/images/" + media.getType().getImageFolderName() + "/" + media.getName() + ".jpg";
-        System.out.println(path);
-        InputStream is = getClass().getClassLoader().getResourceAsStream(path);
-        //if(is == null) return null;
-        try {
-            return ImageIO.read(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        return ImageUtils.getImage("data/images/" + media.getType().getImageFolderName() + "/" + media.getName() + ".jpg");
     }
 
     /**

@@ -11,13 +11,14 @@ import java.util.List;
 
 public class FrontPageView extends BaseView{
     private final MediaController mediaController = MediaController.getInstance();
+    private String query = "";
 
     public FrontPageView(JFrame frame) {
         super(frame);
     }
 
     @Override
-    public Component getComponent() {
+    public Container getContainer() {
         JPanel mainPanel = new JPanel();
 
         mainPanel.setLayout(new BorderLayout());
@@ -27,7 +28,7 @@ public class FrontPageView extends BaseView{
         Container contentContainer = new Container();
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.PAGE_AXIS));
 
-        JTextField searchbar = new JTextField();
+        JTextField searchbar = new JTextField(query);
         searchbar.setPreferredSize(new Dimension(200, 20));
         topContainer.add(searchbar);
 
@@ -38,7 +39,7 @@ public class FrontPageView extends BaseView{
         searchButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String query = searchbar.getText();
+                query = searchbar.getText();
 
                 contentContainer.remove(0);
                 contentContainer.add(updateContentContainer(query));
@@ -66,7 +67,7 @@ public class FrontPageView extends BaseView{
 
     }
     private JScrollPane updateContentContainer(){
-        return updateContentContainer("");
+        return updateContentContainer(query);
     }
 
     private JScrollPane updateContentContainer(String query){
@@ -86,7 +87,7 @@ public class FrontPageView extends BaseView{
                     rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
                 }
-                rowContainer.add(new MediaItemView(frame, media.getName(), mediaController.getMediaImage(media)).getComponent());
+                rowContainer.add(new MediaItemView(frame, media).getContainer());
 
                 item++;
             }
