@@ -36,6 +36,7 @@ public class MediaItemView extends BaseView{
 
             @Override
             public void mousePressed(MouseEvent e) {
+                if(e.getButton() != MouseEvent.BUTTON1) return;
                 guiController.setView(new FullMediaView(frame, media).getContainer());
             }
 

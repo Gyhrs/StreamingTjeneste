@@ -18,7 +18,7 @@ public class MediaController {
     public MediaController(){
         this.mediaMap = new HashMap<>();
         this.knownGenres = new ArrayList<>();
-        this.knownGenres.add("All Genres");
+        this.knownGenres.add("All genres");
     }
 
     public static MediaController getInstance() {
