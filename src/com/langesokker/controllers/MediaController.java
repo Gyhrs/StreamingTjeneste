@@ -7,18 +7,18 @@ import com.langesokker.utils.ImageUtils;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MediaController {
     private static MediaController instance;
 
     private final Map<SupportedMediaTypes, List<Media>> mediaMap;
+    private List<String> knownGenres;
 
     public MediaController(){
         this.mediaMap = new HashMap<>();
+        this.knownGenres = new ArrayList<>();
+        this.knownGenres.add("All Genres");
     }
 
     public static MediaController getInstance() {
@@ -114,6 +114,14 @@ public class MediaController {
                     continue;
                 }
                 //System.out.println(media.toString());
+                /**
+                 * Tilføjer genre til arraylist af genre, hvis den ikke eksistere.
+                 */
+                Arrays.stream(media.getGenres()).forEach(genre -> {
+                    if (!knownGenres.contains(genre)) {
+                        knownGenres.add(genre);
+                    }
+                });
                 addMedia(media);
             }
         } catch (IOException e) {
@@ -127,6 +135,10 @@ public class MediaController {
                 }
             }
         }
+    }
+
+    public String[] getKnownGenres() {
+        return knownGenres.toArray(new String[]{});
     }
 
     public Map<SupportedMediaTypes, List<Media>> getMediaMap() {

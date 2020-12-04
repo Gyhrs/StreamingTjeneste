@@ -1,8 +1,6 @@
 package com.langesokker.media;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Denne enum register hvilke typer af medier som vores program supporter.
@@ -105,5 +103,14 @@ public enum SupportedMediaTypes {
      */
     public interface MediaGenerator{
         Media generate(String name, int releaseDate, int endDate, String[] genre, double rating, String[] extraData);
+    }
+
+    public static String[] getMediaTypesArray() {
+        List<String> mediaTypes = new ArrayList<>();
+        mediaTypes.add("All media");
+        for (SupportedMediaTypes types : SupportedMediaTypes.values()) {
+            mediaTypes.add(types.name());
+        }
+        return mediaTypes.toArray(new String[]{});
     }
 }

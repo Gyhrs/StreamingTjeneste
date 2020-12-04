@@ -2,6 +2,7 @@ package com.langesokker.views;
 
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
+import com.langesokker.media.SupportedMediaTypes;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,14 @@ public class FrontPageView extends BaseView{
         topContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         Container contentContainer = new Container();
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.PAGE_AXIS));
+
+        JComboBox<String> mediaTypesBox = new JComboBox<>(SupportedMediaTypes.getMediaTypesArray());
+        mediaTypesBox.setEditable(true);
+        topContainer.add(mediaTypesBox);
+
+        JComboBox<String> genresBox = new JComboBox<>(mediaController.getKnownGenres());
+        genresBox.setEditable(true);
+        topContainer.add(genresBox);
 
         JTextField searchbar = new JTextField(query);
         searchbar.setPreferredSize(new Dimension(200, 20));
