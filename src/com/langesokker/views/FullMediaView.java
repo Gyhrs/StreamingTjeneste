@@ -3,7 +3,9 @@ package com.langesokker.views;
 import com.langesokker.components.JText;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
+import com.langesokker.controllers.UserController;
 import com.langesokker.media.Media;
+import com.langesokker.models.User;
 import com.langesokker.utils.ImageUtils;
 
 import javax.swing.*;
@@ -15,6 +17,7 @@ public class FullMediaView extends BaseView {
     private Media media;
     private final MediaController mediaController = MediaController.getInstance();
     private final GUIController guiController = GUIController.getInstance();
+    private User currentUser;
 
     public FullMediaView (JFrame frame, Media media) {
         super(frame);
@@ -50,6 +53,18 @@ public class FullMediaView extends BaseView {
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> guiController.setView(guiController.getFrontPage().getContainer()));
         infoPanel.add(backButton);
+
+        JButton addToMyList = new JButton("Add to my list");
+        addToMyList.addActionListener(e -> {
+            UserController.getInstance().addMediaToUser(currentUser, media);
+        });
+        infoPanel.add(addToMyList);
+
+        JButton removeFromMyList = new JButton("Remove from my list");
+        removeFromMyList.addActionListener(e -> {
+            UserController.getInstance().removeMediaFromUser(currentUser, media);
+        });
+        infoPanel.add(removeFromMyList);
 
         mainPanel.add(imagePanel);
         mainPanel.add(infoPanel);

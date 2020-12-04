@@ -1,5 +1,6 @@
 package com.langesokker.controllers;
 
+import com.langesokker.media.Media;
 import com.langesokker.models.User;
 
 import java.util.ArrayList;
@@ -20,5 +21,13 @@ public class UserController {
     public static UserController getInstance() {
         if (instance == null) instance = new UserController();
         return instance;
+    }
+
+    public void addMediaToUser(User user, Media media) {
+        user.addMediaToList(media);
+    }
+
+    public void removeMediaFromUser(User user, Media media){
+        user.removeMediaFromList(media);
     }
 }
