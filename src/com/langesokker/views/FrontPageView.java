@@ -1,6 +1,6 @@
 package com.langesokker.views;
 
-import com.langesokker.controllers.GUIController;
+import com.langesokker.components.containers.MediaItemContainer;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.Flow;
 
 public class FrontPageView extends BaseView{
     private final MediaController mediaController = MediaController.getInstance();
@@ -132,7 +131,7 @@ public class FrontPageView extends BaseView{
                     rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
                 }
-                rowContainer.add(new MediaItemView(frame, media).getContainer());
+                rowContainer.add(new MediaItemContainer(media).getContainer());
 
                 item++;
             }

@@ -1,6 +1,6 @@
 package com.langesokker.views;
 
-import com.langesokker.JText;
+import com.langesokker.components.JText;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
@@ -8,8 +8,6 @@ import com.langesokker.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
 public class FullMediaView extends BaseView {

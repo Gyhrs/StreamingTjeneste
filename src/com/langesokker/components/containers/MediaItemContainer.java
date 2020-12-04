@@ -1,9 +1,10 @@
-package com.langesokker.views;
+package com.langesokker.components.containers;
 
-import com.langesokker.JText;
+import com.langesokker.components.JText;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
+import com.langesokker.views.FullMediaView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,21 +12,19 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
-public class MediaItemView extends BaseView{
+public class MediaItemContainer {
 
     Media media;
     String name;
     BufferedImage image;
     private final GUIController guiController = GUIController.getInstance();
 
-    public MediaItemView(JFrame frame, Media media){
-        super(frame);
+    public MediaItemContainer(Media media){
         this.media = media;
         this.name = media.getName();
         this.image = MediaController.getInstance().getMediaImage(media);
     }
 
-    @Override
     public Container getContainer(){
         Container container = new Container();
         container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
@@ -37,7 +36,7 @@ public class MediaItemView extends BaseView{
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() != MouseEvent.BUTTON1) return;
-                guiController.setView(new FullMediaView(frame, media).getContainer());
+                guiController.setView(new FullMediaView(guiController.getFrame(), media).getContainer());
             }
 
             @Override
@@ -52,7 +51,7 @@ public class MediaItemView extends BaseView{
 
         container.add(new JLabel(new ImageIcon(image)));
         container.add(new JText(name));
-
         return container;
+
     }
 }

@@ -2,7 +2,6 @@ package com.langesokker.controllers;
 
 import com.langesokker.media.Media;
 import com.langesokker.views.FrontPageView;
-import com.langesokker.views.MediaItemView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +41,10 @@ public class GUIController {
 
         frame.add(frontPage.getContainer());
 
+    }
+
+    public JFrame getFrame() {
+        return frame;
     }
 
     public void setView(Container container){

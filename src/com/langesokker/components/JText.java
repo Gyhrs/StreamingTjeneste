@@ -1,4 +1,4 @@
-package com.langesokker;
+package com.langesokker.components;
 
 import javax.swing.*;
 import java.awt.*;
