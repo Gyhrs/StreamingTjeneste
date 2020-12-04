@@ -1,5 +1,6 @@
 package com.langesokker.components.containers;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class NavBarContainer{
@@ -11,7 +12,24 @@ public class NavBarContainer{
     }
 
     public Container getContainer(){
-        return null;
+        JPanel navContainer = new JPanel();
+        navContainer.setLayout(new BorderLayout());
+        navContainer.setBackground(new Color(31, 31, 31));
+        Container leftContainer = new Container();
+        leftContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JButton homeButton = new JButton("Home");
+        leftContainer.add(homeButton);
+
+        navContainer.add(leftContainer, BorderLayout.WEST);
+
+        if(centerNav != null){
+            navContainer.add(centerNav, BorderLayout.CENTER);
+        }
+
+        Container rightContainer = new Container();
+        leftContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        navContainer.add(rightContainer, BorderLayout.EAST);
+        return navContainer;
     }
 
 }

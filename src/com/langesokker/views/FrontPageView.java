@@ -1,6 +1,7 @@
 package com.langesokker.views;
 
 import com.langesokker.components.containers.MediaItemContainer;
+import com.langesokker.components.containers.NavBarContainer;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
@@ -31,34 +32,34 @@ public class FrontPageView extends BaseView{
         JPanel mainPanel = new JPanel();
 
         mainPanel.setLayout(new BorderLayout());
-
-        Container topContainer = new Container();
-        topContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
         Container contentContainer = new Container();
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.PAGE_AXIS));
+
+        Container centerNavContainer = new Container();
+        centerNavContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JComboBox<String> mediaTypesBox = new JComboBox<>(SupportedMediaTypes.getMediaTypesArray());
         mediaTypesBox.setEditable(true);
         if(!preferredMediaType.trim().equals("")){
             mediaTypesBox.setSelectedItem(preferredMediaType);
         }
-        topContainer.add(mediaTypesBox);
+        centerNavContainer.add(mediaTypesBox);
 
         JComboBox<String> genresBox = new JComboBox<>(mediaController.getKnownGenres());
         genresBox.setEditable(true);
         if(!preferredGenre.trim().equals("")){
             genresBox.setSelectedItem(preferredGenre);
         }
-        topContainer.add(genresBox);
+        centerNavContainer.add(genresBox);
 
         JTextField searchbar = new JTextField(query);
         searchbar.setPreferredSize(new Dimension(200, 20));
-        topContainer.add(searchbar);
+        centerNavContainer.add(searchbar);
 
         JButton searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(100, 20));
 
-        topContainer.add(searchButton);
+        centerNavContainer.add(searchButton);
         searchButton.addActionListener(e -> {
             query = searchbar.getText();
             preferredGenre = (String) genresBox.getSelectedItem();
@@ -67,9 +68,8 @@ public class FrontPageView extends BaseView{
             contentContainer.add(FrontPageView.this.updateContentContainer(preferredMediaType, preferredGenre, query));
             mainPanel.revalidate();
             mainPanel.repaint();
-
         });
-
+        Container navContainer = new NavBarContainer(centerNavContainer).getContainer();
         /*JButton someButton = new JButton("homdog");
         someButton.addActionListener(new ActionListener() {
             @Override
@@ -80,7 +80,7 @@ public class FrontPageView extends BaseView{
         contentContainer.add(someButton);*/
         contentContainer.add(updateContentContainer());
 
-        mainPanel.add(topContainer, BorderLayout.NORTH);
+        mainPanel.add(navContainer, BorderLayout.NORTH);
         mainPanel.add(contentContainer, BorderLayout.CENTER);
         return mainPanel;
     }
