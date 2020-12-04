@@ -52,6 +52,10 @@ public class User {
         myList.remove(media);
     }
 
+    @Override
+    public String toString(){
+        return name;
+    }
 
 }
 

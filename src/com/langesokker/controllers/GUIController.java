@@ -15,7 +15,7 @@ public class GUIController {
 
     private final MediaController mediaController = MediaController.getInstance();
     private final JFrame frame;
-    private final FrontPageView frontPage;
+    private FrontPageView frontPage;
 
     public GUIController(){
         frame = new JFrame("Lange sokker streaming");
@@ -51,6 +51,10 @@ public class GUIController {
         frame.setContentPane(container);
         frame.revalidate();
         frame.repaint();
+    }
+
+    public void resetFrontPage(){
+        this.frontPage = new FrontPageView(frame);
     }
 
     public FrontPageView getFrontPage() {
