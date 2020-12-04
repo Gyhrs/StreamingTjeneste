@@ -7,6 +7,7 @@ import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.util.Arrays;
 import java.util.List;
@@ -101,8 +102,9 @@ public class FrontPageView extends BaseView{
         } catch (IllegalArgumentException iae) {}
 
         int item = 0;
-        Container container = new Container();
-        container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        panel.setBackground(new Color(61,61,61));
         Container rowContainer = new Container();
         rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
         for(List<Media> mediaList : mediaController.getMediaMap().values()){
@@ -126,7 +128,7 @@ public class FrontPageView extends BaseView{
                     continue;
                 }
                 if(item % 5 == 0){
-                    container.add(rowContainer);
+                    panel.add(rowContainer);
                     rowContainer = new Container();
                     rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
@@ -137,9 +139,9 @@ public class FrontPageView extends BaseView{
             }
         }
 
-        container.add(rowContainer);
+        panel.add(rowContainer);
 
-        JScrollPane scrollPane = new JScrollPane(container, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scrollPane = new JScrollPane(panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         return scrollPane;
     }

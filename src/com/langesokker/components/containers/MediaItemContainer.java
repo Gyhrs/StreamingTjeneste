@@ -50,7 +50,7 @@ public class MediaItemContainer {
         });
 
         container.add(new JLabel(new ImageIcon(image)));
-        container.add(new JText(name));
+        container.add(new JText(name, Color.WHITE));
         return container;
 
     }

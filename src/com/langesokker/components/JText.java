@@ -8,10 +8,16 @@ public class JText extends JLabel {
     private int fontSize;
     private boolean isBold = false;
     String fontName = "Times New Roman";
+    Color color;
 
     public JText(String text){
         super(text);
         this.fontSize = super.getFont().getSize();
+    }
+
+    public JText(String text, Color color){
+        this(text);
+        this.color = color;
     }
 
     public JText(String text, int fontSize){
@@ -44,6 +50,7 @@ public class JText extends JLabel {
      */
     @Override
     protected void paintComponent(Graphics g) {
+        if(color != null) super.setForeground(Color.WHITE);
         Font defaultFont = super.getFont();
         super.setFont(new Font(fontName, isBold() ? Font.BOLD : Font.PLAIN, getFontSize()));
         super.paintComponent(g);
