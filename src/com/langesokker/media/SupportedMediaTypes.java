@@ -85,7 +85,6 @@ public enum SupportedMediaTypes {
         String[] extraData = new String[]{};
         if (data.length > 4) {
             extraData = Arrays.copyOfRange(data, 4,data.length);
-            System.out.println(Arrays.toString(extraData));
         }
         return generator.generate(name, releaseDate, endDate, genres, rating, extraData);
     }

@@ -28,6 +28,7 @@ public class MediaItemContainer {
     public Container getContainer(){
         Container container = new Container();
         container.setLayout(new BoxLayout(container, BoxLayout.PAGE_AXIS));
+        container.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         container.setMaximumSize(new Dimension(50,50));
         container.addMouseListener(new MouseListener() {
             @Override

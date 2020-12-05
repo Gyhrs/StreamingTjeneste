@@ -20,14 +20,24 @@ public class JText extends JLabel {
         this.color = color;
     }
 
-    public JText(String text, int fontSize){
+    public JText(String text, int fontSize) {
         super(text);
         this.fontSize = fontSize;
+
+    }
+
+    public JText(String text, int fontSize, Color color){
+        this(text, fontSize);
+        this.color = color;
     }
 
     public JText(String text, int fontSize, boolean isBold){
         this(text, fontSize);
         this.isBold = isBold;
+    }
+    public JText(String text, int fontSize, boolean isBold,  Color color){
+        this(text, fontSize, isBold);
+        this.color = color;
     }
 
     public boolean isBold() {

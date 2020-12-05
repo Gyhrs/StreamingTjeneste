@@ -5,6 +5,7 @@ import com.langesokker.components.containers.NavBarContainer;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
+import com.langesokker.utils.Colors;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -104,7 +105,7 @@ public class FrontPageView extends BaseView{
         int item = 0;
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setBackground(new Color(61,61,61));
+        panel.setBackground(Colors.SECONDARY_DARK.getColor());
         Container rowContainer = new Container();
         rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
         for(List<Media> mediaList : mediaController.getMediaMap().values()){

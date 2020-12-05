@@ -7,6 +7,7 @@ import com.langesokker.controllers.MediaController;
 import com.langesokker.controllers.UserController;
 import com.langesokker.media.Media;
 import com.langesokker.models.User;
+import com.langesokker.utils.Colors;
 import com.langesokker.utils.ImageUtils;
 
 import javax.swing.*;
@@ -31,10 +32,15 @@ public class FullMediaView extends BaseView {
      */
     @Override
     public Container getContainer() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
+        mainPanel.setBackground(Colors.SECONDARY_DARK.getColor());
         JPanel imagePanel = new JPanel();
+        imagePanel.setOpaque(false);
         JPanel infoPanel = new JPanel();
+        infoPanel.setOpaque(false);
 
         imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.Y_AXIS));
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
@@ -47,10 +53,10 @@ public class FullMediaView extends BaseView {
             imagePanel.add(new JLabel(new ImageIcon(playIcon)));
         }
 
-        infoPanel.add(new JText("Title: " + media.getName(), 50, true));
-        infoPanel.add(new JText("SomeDescription", 30));
-        infoPanel.add(new JText("Genre: " + media.genresToString(), 20));
-        infoPanel.add(new JText("Rating: " + media.getRating(), 20, true));
+        infoPanel.add(new JText("Title: " + media.getName(), 50, true, Colors.WHITE.getColor()));
+        infoPanel.add(new JText("SomeDescription", 30, Colors.WHITE.getColor()));
+        infoPanel.add(new JText("Genre: " + media.genresToString(), 20, Colors.WHITE.getColor()));
+        infoPanel.add(new JText("Rating: " + media.getRating(), 20, true, Colors.WHITE.getColor()));
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> guiController.setView(guiController.getFrontPage().getContainer()));
@@ -70,7 +76,8 @@ public class FullMediaView extends BaseView {
 
         mainPanel.add(imagePanel);
         mainPanel.add(infoPanel);
-
-        return mainPanel;
+        panel.add(new NavBarContainer(new Container()).getContainer(), BorderLayout.NORTH);
+        panel.add(mainPanel, BorderLayout.CENTER);
+        return panel;
     }
 }

@@ -13,7 +13,7 @@ public class MediaController {
     private static MediaController instance;
 
     private final Map<SupportedMediaTypes, List<Media>> mediaMap;
-    private List<String> knownGenres;
+    private final List<String> knownGenres;
 
     public MediaController(){
         this.mediaMap = new HashMap<>();
@@ -113,7 +113,6 @@ public class MediaController {
                     System.out.println("Failed loading " + arrayCurrentLine[0] + ". Skipping...");
                     continue;
                 }
-                //System.out.println(media.toString());
                 /**
                  * Tilføjer genre til arraylist af genre, hvis den ikke eksistere.
                  */

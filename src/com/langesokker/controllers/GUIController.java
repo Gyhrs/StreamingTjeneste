@@ -1,13 +1,9 @@
 package com.langesokker.controllers;
 
-import com.langesokker.media.Media;
 import com.langesokker.views.FrontPageView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 public class GUIController {
 
@@ -48,6 +44,7 @@ public class GUIController {
     }
 
     public void setView(Container container){
+        frame.getContentPane().removeAll();
         frame.setContentPane(container);
         frame.revalidate();
         frame.repaint();

@@ -2,6 +2,7 @@ package com.langesokker.components.containers;
 
 import com.langesokker.controllers.UserController;
 import com.langesokker.models.User;
+import com.langesokker.utils.Colors;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,18 +21,18 @@ public class NavBarContainer{
     public Container getContainer(){
         JPanel navContainer = new JPanel();
         navContainer.setLayout(new BorderLayout());
-        navContainer.setBackground(new Color(31, 31, 31));
+        navContainer.setBackground(Colors.PRIMARY_DARK.getColor());
         Container leftContainer = new Container();
         Container rightContainer = new Container();
         leftContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton homeButton = new JButton("Home");
         leftContainer.add(homeButton);
         JComboBox<User> userBox = new JComboBox<>(UserController.getInstance().getUserArray());
+        userBox.setSelectedItem(userController.getCurrentUser());
         userBox.addItemListener(e -> {
             User user = (User) e.getItem();
             userController.switchUser(user);
         });
-        userBox.setSelectedItem(userController.getCurrentUser());
         rightContainer.add(userBox);
 
         navContainer.add(leftContainer, BorderLayout.WEST);

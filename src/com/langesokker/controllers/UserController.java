@@ -1,9 +1,7 @@
 package com.langesokker.controllers;
 
-import com.langesokker.components.containers.NavBarContainer;
 import com.langesokker.media.Media;
 import com.langesokker.models.User;
-import com.langesokker.views.FrontPageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +10,7 @@ public class UserController {
     private static UserController instance;
     private final List<User> users;
     private User currentUser;
-    private GUIController guicontroller;
+    private final GUIController guiController;
 
     public UserController() {
         this.users = new ArrayList<>();
@@ -21,7 +19,7 @@ public class UserController {
         users.add(new User("Claus Ildebrand", 31));
         users.add(new User("Smilende Signe", 32));
         this.currentUser = users.get(0);
-        this.guicontroller = GUIController.getInstance();
+        this.guiController = GUIController.getInstance();
     }
 
     public static UserController getInstance() {
@@ -42,10 +40,10 @@ public class UserController {
     }
 
     public void switchUser(User user){
+        if(this.currentUser.equals(user)) return;
         this.currentUser = user;
-        guicontroller.resetFrontPage();
-        guicontroller.getFrame().revalidate();
-        guicontroller.getFrame().repaint();
+        guiController.resetFrontPage();
+        guiController.setView(guiController.getFrontPage().getContainer());
     }
 
     public User getCurrentUser(){
