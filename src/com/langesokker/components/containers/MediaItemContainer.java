@@ -45,20 +45,26 @@ public class MediaItemContainer {
         JPanel overlayPanel = new TransparentJPanel(1f, new Color(0,0,0, 10));
         overlayPanel.setLayout(new BorderLayout());
         overlayPanel.setPreferredSize(new Dimension(140,224));
+
         JText text = new JText(String.format("<html><div style=\"width:%dpx; text-align:center;\">%s</div></html>", 100, name),20,true, Color.WHITE);
         text.setHorizontalAlignment(JLabel.CENTER);
         text.setVerticalAlignment(JLabel.CENTER);
+
         overlayPanel.add(text, BorderLayout.CENTER);
+
         Container ratingContainer = new Container();
         ratingContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
         JText ratingText = new JText(media.getRating() + "", 15, true, Colors.WHITE.getColor());
         ratingText.setBorder(new EmptyBorder(0, 0, 0, 2));
         ratingContainer.add(ratingText);
+
         BufferedImage ratingIcon = ImageUtils.getImage("assets/star.png");
         if(ratingIcon != null){
             ratingIcon = ImageUtils.resize(ratingIcon, ratingText.getFontSize(), ratingText.getFontSize());
             ratingContainer.add(new JLabel(new ImageIcon(ratingIcon)));
         }
+
         overlayPanel.add(ratingContainer, BorderLayout.SOUTH);
         overlayPanel.setVisible(false);
 

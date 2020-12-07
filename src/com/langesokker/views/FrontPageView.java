@@ -95,6 +95,7 @@ public class FrontPageView extends BaseView{
     private JScrollPane updateContentContainer(){
         return updateContentContainer("","",query);
     }
+
     /**
      * Updaterer containeren af medier baseret på den string af karakterer man søger efter
      */
@@ -104,6 +105,7 @@ public class FrontPageView extends BaseView{
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         MediaLoaderTask task = new MediaLoaderTask(panel, mediaController.getMediaMap(), mediaTypeString, genre, query);
         task.execute();
+
         return scrollPane;
     }
 }
