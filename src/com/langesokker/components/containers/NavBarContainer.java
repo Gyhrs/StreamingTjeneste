@@ -1,5 +1,6 @@
 package com.langesokker.components.containers;
 
+import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.UserController;
 import com.langesokker.models.User;
 import com.langesokker.utils.Colors;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 public class NavBarContainer{
 
     private final UserController userController = UserController.getInstance();
+    private final GUIController guiController = GUIController.getInstance();
 
     private final Container centerNav;
 
@@ -26,6 +28,10 @@ public class NavBarContainer{
         Container rightContainer = new Container();
         leftContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton homeButton = new JButton("Home");
+        homeButton.addActionListener(e -> {
+            guiController.getFrontPage().resetSearch();
+            guiController.setView(guiController.getFrontPage().getContainer());
+        });
         leftContainer.add(homeButton);
         JComboBox<User> userBox = new JComboBox<>(UserController.getInstance().getUserArray());
         userBox.setSelectedItem(userController.getCurrentUser());
