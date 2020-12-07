@@ -100,7 +100,7 @@ public class FrontPageView extends BaseView{
         SupportedMediaTypes mediaType = null;
         try {
             mediaType = SupportedMediaTypes.valueOf(mediaTypeString);
-        } catch (IllegalArgumentException iae) {}
+        } catch (IllegalArgumentException ignored) {}
 
         int item = 0;
         JPanel panel = new JPanel();
