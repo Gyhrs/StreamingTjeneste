@@ -10,32 +10,34 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-public class MediaLoaderTask extends SwingWorker<JScrollPane, Object> {
+public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
 
     Map<SupportedMediaTypes, List<Media>> availableMedia;
     String mediaTypeString;
     String genre;
     String query;
+    JPanel panel;
+    int item = 0;
 
-    MediaLoaderTask(Map<SupportedMediaTypes, List<Media>> availableMedia, String mediaTypeString, String genre, String query){
+    public MediaLoaderTask(JPanel panel, Map<SupportedMediaTypes, List<Media>> availableMedia, String mediaTypeString, String genre, String query){
         this.availableMedia = availableMedia;
         this.mediaTypeString = mediaTypeString;
         this.genre = genre;
         this.query = query;
+
+        this.panel = panel;
+        this.panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        this.panel.setBackground(Colors.SECONDARY_DARK.getColor());
     }
 
     @Override
-    public JScrollPane doInBackground() throws Exception {
+    public JPanel doInBackground() throws Exception {
         if(isCancelled()) return null;
         SupportedMediaTypes mediaType = null;
         try {
             mediaType = SupportedMediaTypes.valueOf(mediaTypeString);
         } catch (IllegalArgumentException ignored) {}
 
-        int item = 0;
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setBackground(Colors.SECONDARY_DARK.getColor());
         Container rowContainer = new Container();
         rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
         for(List<Media> mediaList : availableMedia.values()){
@@ -59,21 +61,29 @@ public class MediaLoaderTask extends SwingWorker<JScrollPane, Object> {
                     continue;
                 }
                 if(item % 5 == 0){
-                    panel.add(rowContainer);
+                    publish(rowContainer);
+
                     rowContainer = new Container();
                     rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
                 }
-                rowContainer.add(new MediaItemContainer(media).getContainer());
 
+                rowContainer.add(new MediaItemContainer(media).getContainer());
                 item++;
+
             }
         }
 
-        panel.add(rowContainer);
+        publish(rowContainer);
 
-        JScrollPane scrollPane = new JScrollPane(panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-        return scrollPane;
+        return panel;
+    }
+    @Override
+    protected void process(List<Container> chunks) {
+        for (Container container : chunks) {
+            panel.add(container);
+            panel.revalidate();
+            panel.repaint();
+        }
     }
 }
