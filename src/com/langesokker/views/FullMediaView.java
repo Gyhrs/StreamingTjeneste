@@ -79,17 +79,26 @@ public class FullMediaView extends BaseView {
         backButton.addActionListener(e -> guiController.setView(guiController.getFrontPage().getContainer()));
         infoPanel.add(backButton);
 
-        JButton addToMyList = createSimpleButton("Add to my list");
-        addToMyList.addActionListener(e -> {
-            userController.addMediaToUser(userController.getCurrentUser(), media);
+        JButton myListButton = createSimpleButton("Add to my list");
+        if(!media.isInList()){
+            myListButton.setText("Add to my list");
+        } else {
+            myListButton.setText("Remove from my list");
+        }
+        myListButton.addActionListener(e -> {
+            if(media.isInList()){
+                userController.removeMediaFromUser(userController.getCurrentUser(), media);
+                myListButton.setText("Add to my list");
+                media.setInList(false);
+            } else if(!media.isInList()) {
+                userController.addMediaToUser(userController.getCurrentUser(), media);
+                myListButton.setText("Remove from my list");
+                media.setInList(true);
+            }
         });
-        infoPanel.add(addToMyList);
+        infoPanel.add(myListButton);
 
-        JButton removeFromMyList = createSimpleButton("Remove from my list");
-        removeFromMyList.addActionListener(e -> {
-            userController.removeMediaFromUser(userController.getCurrentUser(), media);
-        });
-        infoPanel.add(removeFromMyList);
+
 
         mainPanel.add(imagePanel);
         mainPanel.add(infoPanel);

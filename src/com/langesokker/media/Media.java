@@ -8,12 +8,14 @@ public abstract class Media {
     protected String[] genres;
     protected int releaseDate;
     protected double rating;
+    protected boolean inList;
 
     public Media(String name, int releaseDate, String[] genre, double rating) {
         this.name = name;
         this.genres = genre;
         this.releaseDate = releaseDate;
         this.rating = rating;
+        this.inList = false;
     }
 
     public double getRating() {
@@ -49,6 +51,14 @@ public abstract class Media {
     }
 
     public abstract SupportedMediaTypes getType();
+
+    public boolean isInList() {
+        return inList;
+    }
+
+    public void setInList(boolean inList) {
+        this.inList = inList;
+    }
 
     @Override
     public String toString() {
