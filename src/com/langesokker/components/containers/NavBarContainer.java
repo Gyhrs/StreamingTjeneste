@@ -4,6 +4,7 @@ import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.UserController;
 import com.langesokker.models.User;
 import com.langesokker.utils.Colors;
+import com.langesokker.views.FullMediaView;
 import com.langesokker.views.MyListView;
 
 import javax.swing.*;
