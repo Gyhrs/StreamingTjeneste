@@ -30,7 +30,7 @@ public class MyListView extends BaseView {
         Container rowContainer = new Container();
         rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 20));
             for (Media media : userController.getCurrentUser().getMyList()) {
-
+                item++;
                 if (item % 5 == 0) {
                     panel.add(rowContainer);
                     rowContainer = new Container();
