@@ -47,6 +47,12 @@ public class NavBarContainer{
             navContainer.add(centerNav, BorderLayout.CENTER);
         }
 
+        JButton myListButton = new JButton("My list");
+        myListButton.addActionListener(e -> {
+            //Kalder på MyListView til at skabe en container for sin liste
+        });
+        //left/right - Container.add(myListButton);
+
         leftContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
         rightContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
         navContainer.add(rightContainer, BorderLayout.EAST);
