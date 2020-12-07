@@ -24,9 +24,10 @@ public class FullMediaView extends BaseView {
     private final MediaController mediaController = MediaController.getInstance();
     private final GUIController guiController = GUIController.getInstance();
     private final UserController userController = UserController.getInstance();
+    boolean isPlaying = false;
 
 
-    public FullMediaView (JFrame frame, Media media) {
+    public FullMediaView(JFrame frame, Media media) {
         super(frame);
         this.media = media;
     }
@@ -52,11 +53,33 @@ public class FullMediaView extends BaseView {
         infoPanel.setAlignmentY(Component.TOP_ALIGNMENT);
         infoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
         imagePanel.add(new JLabel(new ImageIcon(mediaController.getMediaImage(media))));
+        JButton playButton = new JButton();
         BufferedImage playIcon = ImageUtils.getImage("assets/play_icon_transparent.png");
-        if(playIcon != null){
+        BufferedImage pauseIcon = ImageUtils.getImage("assets/pauseicon.png");
+
+        if (playIcon != null) {
             playIcon = ImageUtils.resize(playIcon, 70, 70);
-            imagePanel.add(new JLabel(new ImageIcon(playIcon)));
+            playButton.setIcon(new ImageIcon(playIcon));
         }
+
+        BufferedImage finalPlayIcon = playIcon;
+        playButton.addActionListener(e -> {
+            if (isPlaying) {
+                if (finalPlayIcon != null) {
+                    playButton.setIcon(new ImageIcon(finalPlayIcon));
+
+                }
+                isPlaying = false;
+            } else {
+                isPlaying = true;
+                if (pauseIcon != null) {
+                    playButton.setIcon(new ImageIcon(pauseIcon));
+
+                }
+            }
+            playButton.repaint();
+        });
+        imagePanel.add(playButton);
 
 
         infoPanel.add(new JText("Title: " + media.getName(), 50, true, Colors.WHITE.getColor()));
@@ -69,7 +92,7 @@ public class FullMediaView extends BaseView {
         ratingText.setBorder(new EmptyBorder(0, 0, 0, 5));
         ratingContainer.add(ratingText);
         BufferedImage ratingIcon = ImageUtils.getImage("assets/star.png");
-        if(ratingIcon != null){
+        if (ratingIcon != null) {
             ratingIcon = ImageUtils.resize(ratingIcon, ratingText.getFontSize(), ratingText.getFontSize());
             ratingContainer.add(new JLabel(new ImageIcon(ratingIcon)));
         }
@@ -80,24 +103,23 @@ public class FullMediaView extends BaseView {
         infoPanel.add(backButton);
 
         JButton myListButton = createSimpleButton("Add to my list");
-        if(!media.isInList()){
+        if (!media.isInList()) {
             myListButton.setText("Add to my list");
         } else {
             myListButton.setText("Remove from my list");
         }
         myListButton.addActionListener(e -> {
-            if(media.isInList()){
+            if (media.isInList()) {
                 userController.removeMediaFromUser(userController.getCurrentUser(), media);
                 myListButton.setText("Add to my list");
                 media.setInList(false);
-            } else if(!media.isInList()) {
+            } else if (!media.isInList()) {
                 userController.addMediaToUser(userController.getCurrentUser(), media);
                 myListButton.setText("Remove from my list");
                 media.setInList(true);
             }
         });
         infoPanel.add(myListButton);
-
 
 
         mainPanel.add(imagePanel);
