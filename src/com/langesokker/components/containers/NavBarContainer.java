@@ -4,6 +4,7 @@ import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.UserController;
 import com.langesokker.models.User;
 import com.langesokker.utils.Colors;
+import com.langesokker.views.MyListView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,9 +50,9 @@ public class NavBarContainer{
 
         JButton myListButton = new JButton("My list");
         myListButton.addActionListener(e -> {
-            //Kalder på MyListView til at skabe en container for sin liste
+            MyListView.getContainer();
         });
-        //left/right - Container.add(myListButton);
+        //leftContainer.add(myListButton);
 
         leftContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
         rightContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
