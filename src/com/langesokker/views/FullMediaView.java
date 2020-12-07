@@ -6,6 +6,7 @@ import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.controllers.UserController;
 import com.langesokker.media.Media;
+import com.langesokker.media.Series;
 import com.langesokker.models.User;
 import com.langesokker.utils.Colors;
 import com.langesokker.utils.ImageUtils;
@@ -61,13 +62,14 @@ public class FullMediaView extends BaseView {
             playIcon = ImageUtils.resize(playIcon, 70, 70);
             playButton.setIcon(new ImageIcon(playIcon));
         }
-        if(pauseIcon != null) {
+        if (pauseIcon != null) {
             pauseIcon = ImageUtils.resize(pauseIcon, 70, 70);
         }
 
 
         BufferedImage finalPlayIcon = playIcon;
         BufferedImage finalPauseIcon = pauseIcon;
+
         playButton.addActionListener(e -> {
             if (isPlaying) {
                 if (finalPlayIcon != null) {
@@ -85,7 +87,6 @@ public class FullMediaView extends BaseView {
             playButton.repaint();
         });
         imagePanel.add(playButton);
-
 
         infoPanel.add(new JText("Title: " + media.getName(), 50, true, Colors.WHITE.getColor()));
         infoPanel.add(new JText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus in ligula porta sodales. Nulla facilisi. Mauris interdum purus dui, eu placerat sem posuere at. Aliquam non odio sed nunc condimentum interdum vitae mattis justo. Nullam a risus a sem molestie vulputate. Ut pulvinar augue vitae neque sodales, eget condimentum risus vulputate.", 30, Colors.WHITE.getColor()));
@@ -126,6 +127,25 @@ public class FullMediaView extends BaseView {
         });
         infoPanel.add(myListButton);
 
+        if (media instanceof Series) {
+            Series series = (Series) media;
+            // TODO: Make seasonable interface
+
+            Integer[] seasons = series.getSeasons().keySet().toArray(new Integer[]{});
+            JComboBox<Integer> seasonsBox = new JComboBox<>(seasons);
+            infoPanel.add(seasonsBox);
+
+            Integer[] episodes = series.getEpisodesInSeason(seasonsBox.getSelectedItem() != null? (int) seasonsBox.getSelectedItem() : 1);
+            JComboBox<Integer> episodesBox = new JComboBox<>(episodes);
+            infoPanel.add(episodesBox);
+
+            seasonsBox.addItemListener(e -> {
+                int season = (int) e.getItem();
+                episodesBox.removeAllItems();
+                Integer[] episodesInSeason = series.getEpisodesInSeason(season);
+                episodesBox.setModel(new DefaultComboBoxModel<>(episodesInSeason));
+            });
+        }
 
         mainPanel.add(imagePanel);
         mainPanel.add(infoPanel);

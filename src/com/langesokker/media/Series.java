@@ -12,6 +12,7 @@ public class Series extends Media{
         super(name, releaseDate, genre, rating);
         this.endDate = endDate;
         this.isStillRunning = isStillRunning;
+        this.seasons = seasons;
     }
 
     public Map<Integer, Integer> getSeasons() {
@@ -33,5 +34,14 @@ public class Series extends Media{
     @Override
     public SupportedMediaTypes getType() {
         return SupportedMediaTypes.SERIES;
+    }
+
+    public Integer[] getEpisodesInSeason(int seasonNum) {
+        int episodes = seasons.get(seasonNum);
+        Integer[] episodeArray = new Integer[episodes];
+        for (int i = 0; i<episodes; i++) {
+            episodeArray[i] = i+1;
+        }
+        return episodeArray;
     }
 }
