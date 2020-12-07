@@ -50,9 +50,11 @@ public class NavBarContainer{
 
         JButton myListButton = new JButton("My list");
         myListButton.addActionListener(e -> {
-            MyListView.getContainer();
+            MyListView myListView = new MyListView(guiController.getFrame());
+            Container container = myListView.getContainer();
+            guiController.setView(container);
         });
-        //leftContainer.add(myListButton);
+        leftContainer.add(myListButton);
 
         leftContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
         rightContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
