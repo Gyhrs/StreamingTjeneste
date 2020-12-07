@@ -61,8 +61,13 @@ public class FullMediaView extends BaseView {
             playIcon = ImageUtils.resize(playIcon, 70, 70);
             playButton.setIcon(new ImageIcon(playIcon));
         }
+        if(pauseIcon != null) {
+            pauseIcon = ImageUtils.resize(pauseIcon, 70, 70);
+        }
+
 
         BufferedImage finalPlayIcon = playIcon;
+        BufferedImage finalPauseIcon = pauseIcon;
         playButton.addActionListener(e -> {
             if (isPlaying) {
                 if (finalPlayIcon != null) {
@@ -72,8 +77,8 @@ public class FullMediaView extends BaseView {
                 isPlaying = false;
             } else {
                 isPlaying = true;
-                if (pauseIcon != null) {
-                    playButton.setIcon(new ImageIcon(pauseIcon));
+                if (finalPauseIcon != null) {
+                    playButton.setIcon(new ImageIcon(finalPauseIcon));
 
                 }
             }
