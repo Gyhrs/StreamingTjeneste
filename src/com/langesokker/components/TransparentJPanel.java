@@ -26,7 +26,7 @@ public class TransparentJPanel extends JPanel {
 
     }
 
-    @Override
+    /*@Override
     protected void paintChildren(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setColor(getBackground());
@@ -37,5 +37,5 @@ public class TransparentJPanel extends JPanel {
                 AlphaComposite.SRC_ATOP, 1f));
 
         super.paintChildren(g);
-    }
+    }*/
 }
