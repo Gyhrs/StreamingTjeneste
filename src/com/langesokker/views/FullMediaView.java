@@ -125,17 +125,17 @@ public class FullMediaView extends BaseView {
 
 
         JButton myListButton = createSimpleButton("Add to my list");
-        if (!media.isInList()) {
+        if (!UserController.getInstance().getCurrentUser().isInList(media)) {
             myListButton.setText("Add to my list");
         } else {
             myListButton.setText("Remove from my list");
         }
         myListButton.addActionListener(e -> {
-            if (media.isInList()) {
+            if (UserController.getInstance().getCurrentUser().isInList(media)) {
                 userController.removeMediaFromUser(userController.getCurrentUser(), media);
                 myListButton.setText("Add to my list");
                 media.setInList(false);
-            } else if (!media.isInList()) {
+            } else if (!UserController.getInstance().getCurrentUser().isInList(media)) {
                 userController.addMediaToUser(userController.getCurrentUser(), media);
                 myListButton.setText("Remove from my list");
                 media.setInList(true);

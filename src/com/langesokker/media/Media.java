@@ -52,13 +52,6 @@ public abstract class Media {
 
     public abstract SupportedMediaTypes getType();
 
-    public boolean isInList() {
-        return inList;
-    }
-
-    public void setInList(boolean inList) {
-        this.inList = inList;
-    }
 
     @Override
     public String toString() {

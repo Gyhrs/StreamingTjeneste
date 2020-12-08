@@ -10,13 +10,13 @@ public class User {
     private int age;
     private List<Media> myList;
 
-    public User (String name, int age, List<Media> myList){
+    public User(String name, int age, List<Media> myList) {
         this.name = name;
         this.age = age;
         this.myList = myList;
     }
 
-    public User(String name, int age){
+    public User(String name, int age) {
         this(name, age, new ArrayList<>());
     }
 
@@ -44,16 +44,25 @@ public class User {
         this.myList = myList;
     }
 
-    public void addMediaToList(Media media){
-        if(!myList.contains(media)) myList.add(media);
+    public void addMediaToList(Media media) {
+        if (!myList.contains(media)) myList.add(media);
     }
 
-    public void removeMediaFromList(Media media){
+    public void removeMediaFromList(Media media) {
         myList.remove(media);
     }
 
+    public boolean isInList(Media media) {
+        for (Media m : myList) {
+            if (media == m) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
-    public String toString(){
+    public String toString() {
         return name;
     }
 
