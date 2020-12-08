@@ -124,24 +124,7 @@ public class FullMediaView extends BaseView {
         buttonBox.add(backButton);
         buttonBox.add(Box.createRigidArea(new Dimension(30,0)));
 
-
-        JButton myListButton = createSimpleButton("Add to my list");
-        User currentUser = userController.getCurrentUser();
-        if (!currentUser.isInList(media)) {
-            myListButton.setText("Add to my list");
-        } else {
-            myListButton.setText("Remove from my list");
-        }
-        myListButton.addActionListener(e -> {
-            if (currentUser.isInList(media)) {
-                userController.removeMediaFromUser(currentUser, media);
-                myListButton.setText("Add to my list");
-            } else {
-                userController.addMediaToUser(currentUser, media);
-                myListButton.setText("Remove from my list");
-            }
-        });
-        buttonBox.add(myListButton);
+        buttonBox.add(createAddToListButton());
         innerBox.add(buttonBox);
         infoPanel.add(innerBox);
 
@@ -165,5 +148,25 @@ public class FullMediaView extends BaseView {
         Border compound = new CompoundBorder(line, margin);
         button.setBorder(compound);
         return button;
+    }
+
+    private JButton createAddToListButton() {
+        JButton myListButton = createSimpleButton("Add to my list");
+        User currentUser = userController.getCurrentUser();
+        if (!currentUser.isInList(media)) {
+            myListButton.setText("Add to my list");
+        } else {
+            myListButton.setText("Remove from my list");
+        }
+        myListButton.addActionListener(e -> {
+            if (currentUser.isInList(media)) {
+                userController.removeMediaFromUser(currentUser, media);
+                myListButton.setText("Add to my list");
+            } else {
+                userController.addMediaToUser(currentUser, media);
+                myListButton.setText("Remove from my list");
+            }
+        });
+        return myListButton;
     }
 }
