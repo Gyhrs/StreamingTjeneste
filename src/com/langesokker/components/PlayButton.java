@@ -3,6 +3,8 @@ package com.langesokker.components;
 import com.langesokker.utils.ImageUtils;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class PlayButton extends JButton{
@@ -13,8 +15,14 @@ public class PlayButton extends JButton{
     boolean isPlaying = false;
 
     public PlayButton(){
-        this.playIcon = ImageUtils.resize(ImageUtils.getImage("assets/play_icon_transparent.png"), 70, 70);
-        this.pauseIcon = ImageUtils.resize(ImageUtils.getImage("assets/pauseicon.png"), 70, 70);
+        this.setBorder(new EmptyBorder(0,0,0,0));
+        this.setBorderPainted(false);
+        this.setContentAreaFilled(false);
+        this.setFocusPainted(false);
+        this.setOpaque(false);
+        this.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        this.playIcon = ImageUtils.resize(ImageUtils.getImage("assets/play_icon_transparent.png"), 90, 90);
+        this.pauseIcon = ImageUtils.resize(ImageUtils.getImage("assets/pauseicon.png"), 90, 90);
 
         this.setVerticalAlignment(SwingConstants.CENTER);
 

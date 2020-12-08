@@ -74,20 +74,8 @@ public class JText extends JLabel {
         this.color = color;
     }
 
-    public boolean isBold() {
-        return isBold;
-    }
-
     public int getFontSize() {
         return fontSize;
-    }
-
-    public void setFontSize(int fontSize) {
-        this.fontSize = fontSize;
-    }
-
-    public void setBold(boolean bold) {
-        isBold = bold;
     }
 
     /**
@@ -95,11 +83,9 @@ public class JText extends JLabel {
      */
     @Override
     protected void paintComponent(Graphics g) {
-        if(color != null) super.setForeground(Color.WHITE);
-        Font defaultFont = super.getFont();
-        super.setFont(new Font(fontName, isBold() ? Font.BOLD : Font.PLAIN, getFontSize()));
-        /*super.setBackground(Color.CYAN);
-        super.setOpaque(true);*/
+        if(color == null) super.setForeground(Color.WHITE);
+        else super.setForeground(color);
+        super.setFont(new Font(fontName, isBold ? Font.BOLD : Font.PLAIN, fontSize));
         super.paintComponent(g);
     }
 }

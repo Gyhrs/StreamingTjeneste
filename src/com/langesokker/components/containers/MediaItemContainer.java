@@ -1,17 +1,13 @@
 package com.langesokker.components.containers;
 
 import com.langesokker.components.JText;
-import com.langesokker.components.RatingContainer;
 import com.langesokker.components.TransparentJPanel;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
-import com.langesokker.utils.Colors;
-import com.langesokker.utils.ImageUtils;
 import com.langesokker.views.FullMediaView;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

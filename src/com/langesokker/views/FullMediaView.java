@@ -2,9 +2,10 @@ package com.langesokker.views;
 
 import com.langesokker.components.JText;
 import com.langesokker.components.PlayButton;
-import com.langesokker.components.RatingContainer;
 import com.langesokker.components.containers.EpisodeSelectorContainer;
+import com.langesokker.components.containers.JMultiLine;
 import com.langesokker.components.containers.NavBarContainer;
+import com.langesokker.components.containers.RatingContainer;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.controllers.UserController;
@@ -20,7 +21,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 public class FullMediaView extends BaseView {
 
@@ -42,40 +42,27 @@ public class FullMediaView extends BaseView {
     public Container getContainer() {
         JPanel panel = new JPanel();
         panel.setLayout(new BorderLayout());
+
         JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.LINE_AXIS));
+        mainPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.weighty = 1;
         mainPanel.setBackground(Colors.SECONDARY_DARK.getColor());
 
-        JPanel imagePanel = new JPanel();
-        imagePanel.setOpaque(false);
+        c.gridx = 0;
+        c.gridy = 0;
+        JPanel imagePanel = createImagePanel();
+        mainPanel.add(imagePanel, c);
 
-        imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.Y_AXIS));
-        imagePanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
-        imagePanel.setSize(200, 400);
+        c.gridx = 1;
+        c.gridy = 0;
 
-        JLabel image = new JLabel(new ImageIcon(mediaController.getMediaImage(media)));
-        imagePanel.add(image);
-
-        /* Add a play button */
-        JButton playButton = new PlayButton();
-        imagePanel.add(playButton);
-
-        /* Add season/episode select if possible */
-        if (media instanceof Seasonable) {
-            Seasonable seasonable = (Seasonable) media;
-            imagePanel.add(new EpisodeSelectorContainer(seasonable));
-        }
-
-        JPanel infoPanel = new JPanel();
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.PAGE_AXIS));
-        infoPanel.setOpaque(false);
+        JPanel infoPanel = createInfoPanel();
         infoPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        JPanel innerPanel = getInnerInfoPanel();
-        infoPanel.add(innerPanel);
-
-        mainPanel.add(imagePanel, Component.TOP_ALIGNMENT);
-        mainPanel.add(infoPanel);
+        mainPanel.add(infoPanel, c);
         panel.add(new NavBarContainer(new Container()), BorderLayout.NORTH);
         panel.add(mainPanel, BorderLayout.CENTER);
         return panel;
@@ -92,39 +79,94 @@ public class FullMediaView extends BaseView {
         return button;
     }
 
-    private JPanel getInnerInfoPanel(){
-        JPanel innerPanel = new JPanel();
-        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
-        innerPanel.setOpaque(false);
+    private JPanel createImagePanel() {
+        JPanel imagePanel = new JPanel();
+        imagePanel.setOpaque(false);
 
-        innerPanel.setSize(new Dimension(100, 200));
+        imagePanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 1;
+        c.gridwidth = 1;
+        JLabel image = new JLabel(new ImageIcon(ImageUtils.resize(mediaController.getMediaImage(media), 200, 298)));
+        imagePanel.add(image, c);
 
+        c.gridy = 1;
+        c.insets = new Insets(20, 20, 20, 20);
+        /* Add a play button */
+        JButton playButton = new PlayButton();
+        imagePanel.add(playButton, c);
+
+        c.gridy = 2;
+        /* Add season/episode select if possible */
+        if (media instanceof Seasonable) {
+            Seasonable seasonable = (Seasonable) media;
+            imagePanel.add(new EpisodeSelectorContainer(seasonable), c);
+        }
+        return imagePanel;
+    }
+
+    private JPanel createInfoPanel() {
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new GridBagLayout());
+        infoPanel.setOpaque(false);
+
+        GridBagConstraints c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridheight = 1;
+        c.gridwidth = GridBagConstraints.REMAINDER;
         JText title = new JText(
-                String.format("<html><div style=\"width:%dpx; text-align:left; text-transform: uppercase;\">%s</div></html>", 500, media.getName()),
+                String.format("<html><div style=\"width:%dpx; text-align:left; text-transform: uppercase;\">%s</div></html>", 1000, media.getName()),
                 72,
                 true,
                 Color.WHITE);
 
         title.setBorder(BorderFactory.createLineBorder(Color.black));
-        innerPanel.add(title);
+        infoPanel.add(title, c);
 
-        /*Container ratingContainer = new RatingContainer(media, FlowLayout.LEFT, true);
-        innerPanel.add(ratingContainer);*/
+        c.gridy = 1;
+        c.gridx = 1;
+        c.gridwidth = 1;
+        Box ratingContainer = new RatingContainer(media, false);
+        infoPanel.add(ratingContainer, c);
 
-        innerPanel.add(new JText("Release date: " + media.getReleaseDate(), 20, true, Colors.WHITE.getColor()));
-        innerPanel.add(new JText(media.genresToString(), 20, Colors.WHITE.getColor()));
-        innerPanel.setAlignmentX(SwingConstants.LEFT);
+        c.gridy = 1;
+        c.gridx = 2;
+        c.gridwidth = 1;
+        infoPanel.add(new JText("Release date: " + media.getReleaseDate(), 20, false, Colors.WHITE.getColor()), c);
+        c.gridy = 1;
+        c.gridx = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        infoPanel.add(new JText(media.genresToString(), 20, Colors.WHITE.getColor()), c);
+        c.gridwidth = 1;
+        infoPanel.setAlignmentX(SwingConstants.LEFT);
+
+        c.gridx = 0;
+        c.gridy = 2;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        JMultiLine description = new JMultiLine("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras elementum nisl venenatis diam tincidunt, in fermentum ligula lobortis. Praesent malesuada enim in velit eleifend, eu eleifend dui maximus. Sed vel suscipit est, sed lobortis enim. Nam lobortis tellus eget pellentesque consequat. Nunc massa risus, molestie sed nisl a, molestie dictum massa. Phasellus nibh nisl, tempor in arcu at, semper blandit nisl. Aenean egestas vitae nunc eu eleifend. Morbi ut odio mauris.");
+        infoPanel.add(description, c);
+        c.gridwidth = 1;
 
         Box buttonBox = Box.createHorizontalBox();
 
         JButton backButton = createSimpleButton("Back");
         backButton.addActionListener(e -> guiController.setView(guiController.getFrontPage().getContainer()));
         buttonBox.add(backButton);
-        buttonBox.add(Box.createRigidArea(new Dimension(30,0)));
-
         buttonBox.add(createAddToListButton());
-        innerPanel.add(buttonBox);
-        return innerPanel;
+        c.gridy = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        infoPanel.add(buttonBox, c);
+        c.gridwidth = 1;
+        return infoPanel;
     }
 
 
