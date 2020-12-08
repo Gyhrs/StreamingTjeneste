@@ -134,11 +134,9 @@ public class FullMediaView extends BaseView {
             if (UserController.getInstance().getCurrentUser().isInList(media)) {
                 userController.removeMediaFromUser(userController.getCurrentUser(), media);
                 myListButton.setText("Add to my list");
-                media.setInList(false);
             } else if (!UserController.getInstance().getCurrentUser().isInList(media)) {
                 userController.addMediaToUser(userController.getCurrentUser(), media);
                 myListButton.setText("Remove from my list");
-                media.setInList(true);
             }
         });
         buttonBox.add(myListButton);
