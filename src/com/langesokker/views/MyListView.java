@@ -8,8 +8,6 @@ import com.langesokker.utils.Colors;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
-import java.util.List;
 
 public class MyListView extends BaseView {
 
@@ -17,10 +15,6 @@ public class MyListView extends BaseView {
 
     public MyListView(JFrame frame) {
         super(frame);
-    }
-
-    public JFrame getFrame() {
-        return super.getFrame();
     }
 
     public Container getContainer() {
@@ -39,10 +33,10 @@ public class MyListView extends BaseView {
                     rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
                 }
-                rowContainer.add(new MediaItemContainer(media).getContainer());
+                rowContainer.add(new MediaItemContainer(media));
                 item++;
             }
-        mainPanel.add(new NavBarContainer(new Container()).getContainer(), BorderLayout.NORTH);
+        mainPanel.add(new NavBarContainer(new Container()), BorderLayout.NORTH);
         panel.add(rowContainer);
 
         JScrollPane scrollPane = new JScrollPane(panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

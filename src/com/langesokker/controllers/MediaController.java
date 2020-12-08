@@ -4,7 +4,6 @@ import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
 import com.langesokker.utils.ImageUtils;
 
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.*;
@@ -31,7 +30,7 @@ public class MediaController {
      * @param media = Det medie man gerne vil tilføje til mappen
      */
     public void addMedia(Media media){
-        List<Media> medias = null;
+        List<Media> medias;
         if(mediaMap.containsKey(media.getType())){
             medias = mediaMap.get(media.getType());
         }else{
@@ -113,7 +112,7 @@ public class MediaController {
                     System.out.println("Failed loading " + arrayCurrentLine[0] + ". Skipping...");
                     continue;
                 }
-                /**
+                /*
                  * Tilføjer genre til arraylist af genre, hvis den ikke eksistere.
                  */
                 Arrays.stream(media.getGenres()).forEach(genre -> {

@@ -1,19 +1,12 @@
 package com.langesokker.views;
 
-import com.langesokker.components.containers.MediaItemContainer;
 import com.langesokker.components.containers.NavBarContainer;
 import com.langesokker.controllers.MediaController;
-import com.langesokker.media.Media;
 import com.langesokker.media.MediaLoaderTask;
 import com.langesokker.media.SupportedMediaTypes;
-import com.langesokker.utils.Colors;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class FrontPageView extends BaseView{
     private final MediaController mediaController = MediaController.getInstance();
@@ -73,7 +66,7 @@ public class FrontPageView extends BaseView{
             mainPanel.revalidate();
             mainPanel.repaint();
         });
-        Container navContainer = new NavBarContainer(centerNavContainer).getContainer();
+        Container navContainer = new NavBarContainer(centerNavContainer);
         /*JButton someButton = new JButton("homdog");
         someButton.addActionListener(new ActionListener() {
             @Override

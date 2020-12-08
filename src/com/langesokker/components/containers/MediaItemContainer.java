@@ -10,14 +10,13 @@ import com.langesokker.utils.ImageUtils;
 import com.langesokker.views.FullMediaView;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
-public class MediaItemContainer {
+public class MediaItemContainer extends JPanel{
 
     Media media;
     String name;
@@ -28,14 +27,11 @@ public class MediaItemContainer {
         this.media = media;
         this.name = media.getName();
         this.image = MediaController.getInstance().getMediaImage(media);
-    }
 
-    public Container getContainer(){
-        JPanel panel = new JPanel();
-        panel.setOpaque(false);
-        panel.setLayout(new OverlayLayout(panel));
-        panel.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        panel.setPreferredSize(new Dimension(140,224));
+        this.setOpaque(false);
+        this.setLayout(new OverlayLayout(this));
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        this.setPreferredSize(new Dimension(140,224));
 
         Container backgroundContainer = new Container();
         backgroundContainer.setLayout(new BorderLayout());
@@ -68,7 +64,7 @@ public class MediaItemContainer {
         overlayPanel.add(ratingContainer, BorderLayout.SOUTH);
         overlayPanel.setVisible(false);
 
-        panel.addMouseListener(new MouseListener() {
+        this.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {}
 
@@ -84,19 +80,18 @@ public class MediaItemContainer {
             @Override
             public void mouseEntered(MouseEvent e) {
                 overlayPanel.setVisible(true);
-                panel.repaint();
+                repaint();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 overlayPanel.setVisible(false);
-                panel.repaint();
+                repaint();
             }
         });
-        panel.add(overlayPanel);
-        panel.add(backgroundContainer);
-
-        return panel;
+        this.add(overlayPanel);
+        this.add(backgroundContainer);
 
     }
+
 }

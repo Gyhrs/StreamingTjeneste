@@ -4,28 +4,20 @@ import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.UserController;
 import com.langesokker.models.User;
 import com.langesokker.utils.Colors;
-import com.langesokker.views.FullMediaView;
 import com.langesokker.views.MyListView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 
-public class NavBarContainer{
+public class NavBarContainer extends JPanel{
 
     private final UserController userController = UserController.getInstance();
     private final GUIController guiController = GUIController.getInstance();
 
-    private final Container centerNav;
 
     public NavBarContainer(Container centerNav) {
-        this.centerNav = centerNav;
-    }
-
-    public Container getContainer(){
-        JPanel navContainer = new JPanel();
-        navContainer.setLayout(new BorderLayout());
-        navContainer.setBackground(Colors.PRIMARY_DARK.getColor());
+        this.setLayout(new BorderLayout());
+        this.setBackground(Colors.PRIMARY_DARK.getColor());
         Container leftContainer = new Container();
         Container rightContainer = new Container();
         leftContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -43,10 +35,10 @@ public class NavBarContainer{
         });
         rightContainer.add(userBox);
 
-        navContainer.add(leftContainer, BorderLayout.WEST);
+        this.add(leftContainer, BorderLayout.WEST);
 
         if(centerNav != null){
-            navContainer.add(centerNav, BorderLayout.CENTER);
+            this.add(centerNav, BorderLayout.CENTER);
         }
 
         JButton myListButton = new JButton("My list");
@@ -59,9 +51,7 @@ public class NavBarContainer{
 
         leftContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
         rightContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
-        navContainer.add(rightContainer, BorderLayout.EAST);
-
-        return navContainer;
+        this.add(rightContainer, BorderLayout.EAST);
     }
 
 }

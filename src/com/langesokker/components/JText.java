@@ -7,8 +7,9 @@ public class JText extends JLabel {
 
     private int fontSize;
     private boolean isBold = false;
-    String fontName = "Times New Roman";
+    String fontName = "Lucida Sans";
     Color color;
+
 
     public JText(String text){
         super(text);
@@ -63,6 +64,8 @@ public class JText extends JLabel {
         if(color != null) super.setForeground(Color.WHITE);
         Font defaultFont = super.getFont();
         super.setFont(new Font(fontName, isBold() ? Font.BOLD : Font.PLAIN, getFontSize()));
+        /*super.setBackground(Color.CYAN);
+        super.setOpaque(true);*/
         super.paintComponent(g);
     }
 }

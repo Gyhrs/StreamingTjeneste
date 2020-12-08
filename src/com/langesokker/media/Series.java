@@ -1,34 +1,36 @@
 package com.langesokker.media;
 
-import java.util.List;
 import java.util.Map;
 
-public class Series extends Media{
+public class Series extends Media implements Seasonable{
     Map<Integer, Integer> seasons;
     int endDate;
-    boolean isStillRunning = false;
+    boolean isStillAiring;
 
-    public Series(String name, int releaseDate, int endDate, boolean isStillRunning,  String[] genre, double rating, Map<Integer, Integer> seasons){
+    public Series(String name, int releaseDate, int endDate, boolean isStillAiring, String[] genre, double rating, Map<Integer, Integer> seasons){
         super(name, releaseDate, genre, rating);
         this.endDate = endDate;
-        this.isStillRunning = isStillRunning;
+        this.isStillAiring = isStillAiring;
         this.seasons = seasons;
     }
 
+    @Override
     public Map<Integer, Integer> getSeasons() {
         return seasons;
     }
-
+    @Override
     public void setSeasons(Map<Integer, Integer> seasons) {
         this.seasons = seasons;
     }
 
+    @Override
     public int getEndDate() {
         return endDate;
     }
 
-    public boolean isStillRunning() {
-        return isStillRunning;
+    @Override
+    public boolean isStillAiring() {
+        return isStillAiring;
     }
 
     @Override
@@ -36,6 +38,7 @@ public class Series extends Media{
         return SupportedMediaTypes.SERIES;
     }
 
+    @Override
     public Integer[] getEpisodesInSeason(int seasonNum) {
         int episodes = seasons.get(seasonNum);
         Integer[] episodeArray = new Integer[episodes];

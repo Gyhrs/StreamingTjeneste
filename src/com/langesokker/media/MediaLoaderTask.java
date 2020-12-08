@@ -1,7 +1,7 @@
 package com.langesokker.media;
 
 import com.langesokker.components.containers.MediaItemContainer;
-import com.langesokker.controllers.MediaController;
+import com.langesokker.controllers.GUIController;
 import com.langesokker.utils.Colors;
 
 import javax.swing.*;
@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
+
+    private final GUIController guiController = GUIController.getInstance();
 
     Map<SupportedMediaTypes, List<Media>> availableMedia;
     String mediaTypeString;
@@ -28,10 +30,17 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
         this.panel = panel;
         this.panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         this.panel.setBackground(Colors.SECONDARY_DARK.getColor());
+        guiController.getFrame().setCursor(new Cursor(Cursor.WAIT_CURSOR));
     }
 
     @Override
-    public JPanel doInBackground() throws Exception {
+    protected void done() {
+        super.done();
+        guiController.getFrame().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+    }
+
+    @Override
+    public JPanel doInBackground() {
         if(isCancelled()) return null;
         SupportedMediaTypes mediaType = null;
         try {
@@ -68,7 +77,7 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
 
                 }
 
-                rowContainer.add(new MediaItemContainer(media).getContainer());
+                rowContainer.add(new MediaItemContainer(media));
                 item++;
 
             }
