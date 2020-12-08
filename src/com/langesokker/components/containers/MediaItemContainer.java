@@ -1,6 +1,7 @@
 package com.langesokker.components.containers;
 
 import com.langesokker.components.JText;
+import com.langesokker.components.RatingContainer;
 import com.langesokker.components.TransparentJPanel;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
@@ -33,11 +34,19 @@ public class MediaItemContainer extends JPanel{
         this.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.setPreferredSize(new Dimension(140,224));
 
+        this.add(createOverlayPanel());
+        this.add(createBackgroundContainer());
+    }
+
+    private Container createBackgroundContainer() {
         Container backgroundContainer = new Container();
         backgroundContainer.setLayout(new BorderLayout());
         backgroundContainer.setPreferredSize(new Dimension(140,224));
         backgroundContainer.add(new JLabel(new ImageIcon(image)), BorderLayout.CENTER);
+        return backgroundContainer;
+    }
 
+    private JPanel createOverlayPanel() {
         JPanel overlayPanel = new TransparentJPanel(1f, new Color(0,0,0, 10));
         overlayPanel.setLayout(new BorderLayout());
         overlayPanel.setPreferredSize(new Dimension(140,224));
@@ -47,21 +56,7 @@ public class MediaItemContainer extends JPanel{
         text.setVerticalAlignment(JLabel.CENTER);
 
         overlayPanel.add(text, BorderLayout.CENTER);
-
-        Container ratingContainer = new Container();
-        ratingContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
-
-        JText ratingText = new JText(media.getRating() + "", 15, true, Colors.WHITE.getColor());
-        ratingText.setBorder(new EmptyBorder(0, 0, 0, 2));
-        ratingContainer.add(ratingText);
-
-        BufferedImage ratingIcon = ImageUtils.getImage("assets/star.png");
-        if(ratingIcon != null){
-            ratingIcon = ImageUtils.resize(ratingIcon, ratingText.getFontSize(), ratingText.getFontSize());
-            ratingContainer.add(new JLabel(new ImageIcon(ratingIcon)));
-        }
-
-        overlayPanel.add(ratingContainer, BorderLayout.SOUTH);
+        overlayPanel.add(new RatingContainer(media), BorderLayout.SOUTH);
         overlayPanel.setVisible(false);
 
         this.addMouseListener(new MouseListener() {
@@ -89,9 +84,6 @@ public class MediaItemContainer extends JPanel{
                 repaint();
             }
         });
-        this.add(overlayPanel);
-        this.add(backgroundContainer);
-
+        return overlayPanel;
     }
-
 }

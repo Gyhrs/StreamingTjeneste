@@ -27,38 +27,26 @@ public class FrontPageView extends BaseView{
     @Override
     public Container getContainer() {
         JPanel mainPanel = new JPanel();
-
         mainPanel.setLayout(new BorderLayout());
+
         Container contentContainer = new Container();
         contentContainer.setLayout(new BoxLayout(contentContainer, BoxLayout.PAGE_AXIS));
 
         Container centerNavContainer = new Container();
         centerNavContainer.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JComboBox<String> mediaTypesBox = new JComboBox<>(SupportedMediaTypes.getMediaTypesArray());
-        mediaTypesBox.setEditable(true);
-        if(!preferredMediaType.trim().equals("")){
-            mediaTypesBox.setSelectedItem(preferredMediaType);
-        }
+        JComboBox<String> mediaTypesBox = createMediaTypesBox();
         centerNavContainer.add(mediaTypesBox);
 
-        JComboBox<String> genresBox = new JComboBox<>(mediaController.getKnownGenres());
-        genresBox.setEditable(true);
-        if(!preferredGenre.trim().equals("")){
-            genresBox.setSelectedItem(preferredGenre);
-        }
+        JComboBox<String> genresBox = createGenresBox();
         centerNavContainer.add(genresBox);
 
-        JTextField searchbar = new JTextField(query);
-        searchbar.setPreferredSize(new Dimension(200, 20));
-        centerNavContainer.add(searchbar);
+        JTextField searchBar = createSearchBar();
+        centerNavContainer.add(searchBar);
 
-        JButton searchButton = new JButton("Search");
-        searchButton.setPreferredSize(new Dimension(100, 20));
-
-        centerNavContainer.add(searchButton);
+        JButton searchButton = createSearchButton();
         searchButton.addActionListener(e -> {
-            query = searchbar.getText();
+            query = searchBar.getText();
             preferredGenre = (String) genresBox.getSelectedItem();
             preferredMediaType = (String) mediaTypesBox.getSelectedItem();
             contentContainer.remove(0);
@@ -66,20 +54,44 @@ public class FrontPageView extends BaseView{
             mainPanel.revalidate();
             mainPanel.repaint();
         });
+        centerNavContainer.add(searchButton);
+
         Container navContainer = new NavBarContainer(centerNavContainer);
-        /*JButton someButton = new JButton("homdog");
-        someButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showConfirmDialog(frame, "HOMDOG!!!!");
-            }
-        });
-        contentContainer.add(someButton);*/
         contentContainer.add(updateContentContainer());
 
         mainPanel.add(navContainer, BorderLayout.NORTH);
         mainPanel.add(contentContainer, BorderLayout.CENTER);
         return mainPanel;
+    }
+
+    private JComboBox<String> createMediaTypesBox() {
+        JComboBox<String> mediaTypesBox = new JComboBox<>(SupportedMediaTypes.getMediaTypesArray());
+        mediaTypesBox.setEditable(true);
+        if(!preferredMediaType.trim().equals("")){
+            mediaTypesBox.setSelectedItem(preferredMediaType);
+        }
+        return mediaTypesBox;
+    }
+
+    private JComboBox<String> createGenresBox() {
+        JComboBox<String> genresBox = new JComboBox<>(mediaController.getKnownGenres());
+        genresBox.setEditable(true);
+        if(!preferredGenre.trim().equals("")){
+            genresBox.setSelectedItem(preferredGenre);
+        }
+        return genresBox;
+    }
+
+    private JTextField createSearchBar() {
+        JTextField searchbar = new JTextField(query);
+        searchbar.setPreferredSize(new Dimension(200, 20));
+        return searchbar;
+    }
+
+    private JButton createSearchButton() {
+        JButton searchButton = new JButton("Search");
+        searchButton.setPreferredSize(new Dimension(100, 20));
+        return  searchButton;
     }
 
     /**

@@ -17,15 +17,20 @@ public class MyListView extends BaseView {
         super(frame);
     }
 
+    /**
+     * Fills a panel with MediaItemView of the medias in User's list
+     * @return a scrollable panel with all media in User's List
+     */
     public Container getContainer() {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
-        int item = 0;
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setBackground(Colors.SECONDARY_DARK.getColor());
         Container rowContainer = new Container();
         rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
+        int item = 0;
+        // Fills the MyList page with data from User's list
             for (Media media : userController.getCurrentUser().getMyList()) {
                 if (item % 5 == 0) {
                     panel.add(rowContainer);

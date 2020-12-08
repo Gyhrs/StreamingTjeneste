@@ -18,40 +18,48 @@ public class NavBarContainer extends JPanel{
     public NavBarContainer(Container centerNav) {
         this.setLayout(new BorderLayout());
         this.setBackground(Colors.PRIMARY_DARK.getColor());
+
         Container leftContainer = new Container();
-        Container rightContainer = new Container();
         leftContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JButton homeButton = new JButton("Home");
-        homeButton.addActionListener(e -> {
-            guiController.getFrontPage().resetSearch();
-            guiController.setView(guiController.getFrontPage().getContainer());
-        });
-        leftContainer.add(homeButton);
-        JComboBox<User> userBox = new JComboBox<>(UserController.getInstance().getUserArray());
-        userBox.setSelectedItem(userController.getCurrentUser());
-        userBox.addItemListener(e -> {
-            User user = (User) e.getItem();
-            userController.switchUser(user);
-        });
-        rightContainer.add(userBox);
+        Container rightContainer = new Container();
+        rightContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
+
+
+        leftContainer.add(createHomeButton());
+        leftContainer.add(createMyListButton());
+        rightContainer.add(createUserBox());
 
         this.add(leftContainer, BorderLayout.WEST);
+        if(centerNav != null) { this.add(centerNav, BorderLayout.CENTER); }
+        this.add(rightContainer, BorderLayout.EAST);
+    }
 
-        if(centerNav != null){
-            this.add(centerNav, BorderLayout.CENTER);
-        }
-
+    private JButton createMyListButton() {
         JButton myListButton = new JButton("My list");
         myListButton.addActionListener(e -> {
             MyListView myListView = new MyListView(guiController.getFrame());
             Container container = myListView.getContainer();
             guiController.setView(container);
         });
-        leftContainer.add(myListButton);
-
-        leftContainer.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        rightContainer.setLayout(new FlowLayout(FlowLayout.LEFT));
-        this.add(rightContainer, BorderLayout.EAST);
+        return myListButton;
     }
 
+    private JComboBox<User> createUserBox() {
+        JComboBox<User> userBox = new JComboBox<>(UserController.getInstance().getUserArray());
+        userBox.setSelectedItem(userController.getCurrentUser());
+        userBox.addItemListener(e -> {
+            User user = (User) e.getItem();
+            userController.switchUser(user);
+        });
+        return userBox;
+    }
+
+    private JButton createHomeButton() {
+        JButton homeButton = new JButton("Home");
+        homeButton.addActionListener(e -> {
+            guiController.getFrontPage().resetSearch();
+            guiController.setView(guiController.getFrontPage().getContainer());
+        });
+        return homeButton;
+    }
 }
