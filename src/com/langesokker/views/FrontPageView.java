@@ -86,7 +86,7 @@ public class FrontPageView extends BaseView{
      * Updaterer hele panelet ud fra
      */
     private JScrollPane updateContentContainer(){
-        return updateContentContainer("","",query);
+        return updateContentContainer(preferredMediaType,preferredGenre,query);
     }
 
     /**
