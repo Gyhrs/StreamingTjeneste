@@ -9,6 +9,7 @@ import com.langesokker.controllers.MediaController;
 import com.langesokker.controllers.UserController;
 import com.langesokker.media.Media;
 import com.langesokker.media.Seasonable;
+import com.langesokker.models.User;
 import com.langesokker.utils.Colors;
 import com.langesokker.utils.ImageUtils;
 
@@ -125,17 +126,18 @@ public class FullMediaView extends BaseView {
 
 
         JButton myListButton = createSimpleButton("Add to my list");
-        if (!UserController.getInstance().getCurrentUser().isInList(media)) {
+        User currentUser = userController.getCurrentUser();
+        if (!currentUser.isInList(media)) {
             myListButton.setText("Add to my list");
         } else {
             myListButton.setText("Remove from my list");
         }
         myListButton.addActionListener(e -> {
-            if (UserController.getInstance().getCurrentUser().isInList(media)) {
-                userController.removeMediaFromUser(userController.getCurrentUser(), media);
+            if (currentUser.isInList(media)) {
+                userController.removeMediaFromUser(currentUser, media);
                 myListButton.setText("Add to my list");
             } else {
-                userController.addMediaToUser(userController.getCurrentUser(), media);
+                userController.addMediaToUser(currentUser, media);
                 myListButton.setText("Remove from my list");
             }
         });
