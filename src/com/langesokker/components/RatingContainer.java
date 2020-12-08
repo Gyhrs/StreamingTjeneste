@@ -12,10 +12,14 @@ import java.awt.image.BufferedImage;
 public class RatingContainer extends Container {
 
     public RatingContainer(Media media) {
+        this(media, FlowLayout.RIGHT, false);
+    }
 
-        this.setLayout(new FlowLayout(FlowLayout.RIGHT));
+    public RatingContainer(Media media, int alignment, boolean includeText) {
 
-        JText ratingText = new JText(media.getRating() + "", 15, true, Colors.WHITE.getColor());
+        this.setLayout(new FlowLayout(alignment));
+
+        JText ratingText = new JText((includeText ? "Rating: " : "") + media.getRating(), 15, true, Colors.WHITE.getColor());
         ratingText.setBorder(new EmptyBorder(0, 0, 0, 2));
         this.add(ratingText);
 

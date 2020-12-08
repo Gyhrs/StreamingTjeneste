@@ -2,6 +2,7 @@ package com.langesokker.views;
 
 import com.langesokker.components.JText;
 import com.langesokker.components.PlayButton;
+import com.langesokker.components.RatingContainer;
 import com.langesokker.components.containers.EpisodeSelectorContainer;
 import com.langesokker.components.containers.NavBarContainer;
 import com.langesokker.controllers.GUIController;
@@ -47,21 +48,12 @@ public class FullMediaView extends BaseView {
 
         JPanel imagePanel = new JPanel();
         imagePanel.setOpaque(false);
-        /*imagePanel.setBackground(Color.GREEN);*/
-        JPanel infoPanel = new JPanel();
-        infoPanel.setOpaque(false);
-        /*infoPanel.setBackground(Color.BLUE);*/
+
         imagePanel.setLayout(new BoxLayout(imagePanel, BoxLayout.Y_AXIS));
-        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-        /*imagePanel.setAlignmentY(Component.CENTER_ALIGNMENT);
-        imagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        infoPanel.setAlignmentY(Component.TOP_ALIGNMENT);
-        infoPanel.setAlignmentX(Component.LEFT_ALIGNMENT);*/
-        infoPanel.setAlignmentX(JPanel.LEFT_ALIGNMENT);
-        infoPanel.setBorder(BorderFactory.createLineBorder(Color.black));
+        imagePanel.setAlignmentY(JPanel.TOP_ALIGNMENT);
+        imagePanel.setSize(200, 400);
 
         JLabel image = new JLabel(new ImageIcon(mediaController.getMediaImage(media)));
-        image.setVerticalAlignment(SwingConstants.CENTER);
         imagePanel.add(image);
 
         /* Add a play button */
@@ -74,65 +66,15 @@ public class FullMediaView extends BaseView {
             imagePanel.add(new EpisodeSelectorContainer(seasonable));
         }
 
-        Box innerBox = Box.createVerticalBox();
-        innerBox.setOpaque(false);
-        //innerPanel.setBackground(Color.YELLOW);
-        innerBox.setSize(new Dimension(10, 500));
-        innerBox.setBorder(BorderFactory.createLineBorder(Color.black));
-        //innerBox.setAlignmentX(SwingConstants.LEFT);
+        JPanel infoPanel = new JPanel();
+        infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.PAGE_AXIS));
+        infoPanel.setOpaque(false);
+        infoPanel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        /*JText title = new JText(
-                String.format("<html><div style=\"width:%dpx; text-align:left; text-transform: uppercase;\">%s</div></html>", 500, media.getName()),
-                72,
-                true,
-                Color.WHITE);*/
-        JText title = new JText(media.getName(),
-                72,
-                true,
-                Color.WHITE);
+        JPanel innerPanel = getInnerInfoPanel();
+        infoPanel.add(innerPanel);
 
-        title.setBorder(BorderFactory.createLineBorder(Color.black));
-        innerBox.add(title);
-        Box infoBar = Box.createHorizontalBox();
-        infoBar.setOpaque(false);
-
-        JPanel ratingContainer = new JPanel();
-        ratingContainer.setOpaque(false);
-        ratingContainer.setLayout(new BoxLayout(ratingContainer, BoxLayout.X_AXIS));
-        JText ratingText = new JText("Rating: " + media.getRating(), 20, true, Colors.WHITE.getColor());
-        ratingText.setBorder(new EmptyBorder(0, 0, 0, 5));
-        ratingContainer.add(ratingText);
-        BufferedImage ratingIcon = ImageUtils.getImage("assets/star.png");
-        if (ratingIcon != null) {
-            ratingIcon = ImageUtils.resize(ratingIcon, ratingText.getFontSize(), ratingText.getFontSize());
-            ratingContainer.add(new JLabel(new ImageIcon(ratingIcon)));
-        }
-        infoBar.add(ratingContainer);
-        infoBar.add(Box.createRigidArea(new Dimension(30,0)));
-
-        infoBar.add(new JText("Release date: " + media.getReleaseDate(), 20, true, Colors.WHITE.getColor()));
-        infoBar.add(Box.createRigidArea(new Dimension(30,0)));
-        infoBar.add(new JText(media.genresToString(), 20, Colors.WHITE.getColor()));
-        infoBar.setAlignmentX(SwingConstants.LEFT);
-
-        innerBox.add(infoBar);
-
-        Box buttonBox = Box.createHorizontalBox();
-
-        JButton backButton = createSimpleButton("Back");
-        backButton.addActionListener(e -> guiController.setView(guiController.getFrontPage().getContainer()));
-        buttonBox.add(backButton);
-        buttonBox.add(Box.createRigidArea(new Dimension(30,0)));
-
-        buttonBox.add(createAddToListButton());
-        innerBox.add(buttonBox);
-        infoPanel.add(innerBox);
-
-        /*infoPanel.add(new JText("Title: " + media.getName(), 50, true, Colors.WHITE.getColor()));
-        infoPanel.add(new JText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sed risus in ligula porta sodales. Nulla facilisi. Mauris interdum purus dui, eu placerat sem posuere at. Aliquam non odio sed nunc condimentum interdum vitae mattis justo. Nullam a risus a sem molestie vulputate. Ut pulvinar augue vitae neque sodales, eget condimentum risus vulputate.", 30, Colors.WHITE.getColor()));
-        infoPanel.add(new JText("Genre: " + media.genresToString(), 20, Colors.WHITE.getColor()));*/
-
-        mainPanel.add(imagePanel);
+        mainPanel.add(imagePanel, Component.TOP_ALIGNMENT);
         mainPanel.add(infoPanel);
         panel.add(new NavBarContainer(new Container()), BorderLayout.NORTH);
         panel.add(mainPanel, BorderLayout.CENTER);
@@ -149,6 +91,42 @@ public class FullMediaView extends BaseView {
         button.setBorder(compound);
         return button;
     }
+
+    private JPanel getInnerInfoPanel(){
+        JPanel innerPanel = new JPanel();
+        innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+        innerPanel.setOpaque(false);
+
+        innerPanel.setSize(new Dimension(100, 200));
+
+        JText title = new JText(
+                String.format("<html><div style=\"width:%dpx; text-align:left; text-transform: uppercase;\">%s</div></html>", 500, media.getName()),
+                72,
+                true,
+                Color.WHITE);
+
+        title.setBorder(BorderFactory.createLineBorder(Color.black));
+        innerPanel.add(title);
+
+        /*Container ratingContainer = new RatingContainer(media, FlowLayout.LEFT, true);
+        innerPanel.add(ratingContainer);*/
+
+        innerPanel.add(new JText("Release date: " + media.getReleaseDate(), 20, true, Colors.WHITE.getColor()));
+        innerPanel.add(new JText(media.genresToString(), 20, Colors.WHITE.getColor()));
+        innerPanel.setAlignmentX(SwingConstants.LEFT);
+
+        Box buttonBox = Box.createHorizontalBox();
+
+        JButton backButton = createSimpleButton("Back");
+        backButton.addActionListener(e -> guiController.setView(guiController.getFrontPage().getContainer()));
+        buttonBox.add(backButton);
+        buttonBox.add(Box.createRigidArea(new Dimension(30,0)));
+
+        buttonBox.add(createAddToListButton());
+        innerPanel.add(buttonBox);
+        return innerPanel;
+    }
+
 
     private JButton createAddToListButton() {
         JButton myListButton = createSimpleButton("Add to my list");
