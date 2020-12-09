@@ -8,11 +8,11 @@ import java.util.*;
  */
 public enum SupportedMediaTypes {
 
-    FILM("film", (name, releaseDate, endDate, genre, rating, extraData) -> {
+    FILM("film.txt","film", (name, releaseDate, endDate, genre, rating, extraData) -> {
         return new Film(name, releaseDate, genre, rating);
     }),
 
-    SERIES("series", (name, releaseDate, endDate, genre, rating, extraData) -> {
+    SERIES("series.txt","series", (name, releaseDate, endDate, genre, rating, extraData) -> {
         boolean airing = true;
         if (endDate > 0) {
             airing = false;
@@ -38,6 +38,8 @@ public enum SupportedMediaTypes {
      */
     private final MediaGenerator generator;
 
+    private String fileName;
+
     /**
      * Navnet for mappen med billederne/thumbnails for denne type medier
      */
@@ -48,7 +50,8 @@ public enum SupportedMediaTypes {
      * @param imageFolderName = mappen med den ønskede medietype;
      * @param generator = variable til at kunne skelne mellem de forskellige medietyper
      */
-    SupportedMediaTypes(String imageFolderName, MediaGenerator generator){
+    SupportedMediaTypes(String fileName, String imageFolderName, MediaGenerator generator){
+        this.fileName = fileName;
         this.imageFolderName = imageFolderName;
         this.generator = generator;
     }
@@ -95,6 +98,14 @@ public enum SupportedMediaTypes {
 
     public void setImageFolderName(String imageFolderName) {
         this.imageFolderName = imageFolderName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
     /**

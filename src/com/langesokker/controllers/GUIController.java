@@ -9,7 +9,6 @@ public class GUIController {
 
     private static GUIController instance;
 
-    private final MediaController mediaController = MediaController.getInstance();
     private final JFrame frame;
     private FrontPageView frontPage;
 

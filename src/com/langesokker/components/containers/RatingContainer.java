@@ -6,10 +6,8 @@ import com.langesokker.utils.Colors;
 import com.langesokker.utils.ImageUtils;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.concurrent.Flow;
 
 public class RatingContainer extends Box {
 

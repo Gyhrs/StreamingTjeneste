@@ -1,16 +1,22 @@
 package com.langesokker.controllers;
 
+import com.langesokker.components.ErrorPopup;
 import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
 import com.langesokker.utils.ImageUtils;
 
+import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class MediaController {
     private static MediaController instance;
-
     private final Map<SupportedMediaTypes, List<Media>> mediaMap;
     private final List<String> knownGenres;
 
@@ -68,21 +74,10 @@ public class MediaController {
 
     /**
      * Denne funktion går igennem alle filerne i /data/media/ mappen og indlæser dem med MediaController#loadFile(String fileName) funktionen.
-     * TODO: Replace new file()
      */
-    public void loadAllMediaTypes(){
-        File mediaDirectory = new File("src/com/langesokker/data/media");
-        if(!mediaDirectory.exists() || !mediaDirectory.isDirectory()){
-            System.out.println("Media data folder not found");
-            return;
-        }
-        File[] dataFiles = mediaDirectory.listFiles();
-        if(dataFiles == null || dataFiles.length == 0){
-            System.out.println("No media data files found");
-            return;
-        }
-        for(File file : dataFiles){
-            loadFile(file.getName());
+    public void loadAllMediaTypes() throws URISyntaxException {
+        for(SupportedMediaTypes mediaType : SupportedMediaTypes.values()){
+            loadFile(mediaType, mediaType.getFileName());
         }
     }
 
@@ -90,26 +85,25 @@ public class MediaController {
      * Indlæser al data fra en given fil. Medie typen bliver valgt ud fra fil navn
      * @param filename = Navnet på filen med dataen (Inkl. fil format)
      */
-    public void loadFile(String filename) {
+    public void loadFile(SupportedMediaTypes mediaType, String filename) {
         //Handles no file exception
-        SupportedMediaTypes mediaType;
-        try{
-            mediaType = SupportedMediaTypes.valueOf(filename.substring(0, filename.indexOf(".")).toUpperCase());
-        }catch (IllegalArgumentException e){
-            // TODO: make it throw exception...
+        String mediaTypeString = filename.substring(0, filename.indexOf(".")).toUpperCase();
+
+        String basePath = "com/langesokker/data/media/";
+        InputStream in = getClass().getClassLoader().getResourceAsStream(basePath + filename);
+        if(in == null){
+            new ErrorPopup(new JFrame(), "Failed to load", "Failed to load mediatype " + mediaTypeString + " data", true);
             return;
         }
-
         BufferedReader reader = null;
         try {
-            String basePath = "src/com/langesokker/data/media/";
-            reader = new BufferedReader(new FileReader(basePath + filename));
+            reader = new BufferedReader(new InputStreamReader(in));
             String currentLine;
             while ((currentLine = reader.readLine()) != null) {
                 String[] arrayCurrentLine = currentLine.split(";");
                 Media media = mediaType.toMedia(arrayCurrentLine);
                 if(media == null){
-                    System.out.println("Failed loading " + arrayCurrentLine[0] + ". Skipping...");
+                    System.out.println("Failed loading " + arrayCurrentLine[0] + ". Skipping..."); //Not related to user
                     continue;
                 }
                 /*
@@ -120,16 +114,19 @@ public class MediaController {
                         knownGenres.add(genre);
                     }
                 });
+                System.out.println(media);
                 addMedia(media);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+
+            new ErrorPopup(new JFrame(), "Failed load", "Failed loading " + mediaTypeString, true);
+            e.printStackTrace(); //For console
         } finally {
             if (reader != null) {
                 try {
                     reader.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    e.printStackTrace(); //For console only
                 }
             }
         }
