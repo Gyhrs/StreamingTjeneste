@@ -14,6 +14,7 @@ import com.langesokker.media.Seasonable;
 import com.langesokker.models.User;
 import com.langesokker.utils.Colors;
 import com.langesokker.utils.ImageUtils;
+import com.sun.xml.internal.rngom.parse.host.Base;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -28,11 +29,20 @@ public class FullMediaView extends BaseView {
     private final MediaController mediaController = MediaController.getInstance();
     private final GUIController guiController = GUIController.getInstance();
     private final UserController userController = UserController.getInstance();
+    private final BaseView previousView;
 
-
-    public FullMediaView(JFrame frame, Media media) {
+    public FullMediaView(JFrame frame, Media media){
+        this(frame, media, null);
+    }
+    public FullMediaView(JFrame frame, Media media, BaseView previousView) {
         super(frame);
         this.media = media;
+        this.previousView = previousView;
+    }
+
+    @Override
+    public String getViewName() {
+        return media.getName();
     }
 
     /**
@@ -135,7 +145,7 @@ public class FullMediaView extends BaseView {
         c.gridy = 1;
         c.gridx = 1;
         c.gridwidth = 1;
-        Box ratingContainer = new RatingContainer(media, false);
+        JComponent ratingContainer = new RatingContainer(media, false);
         infoPanel.add(ratingContainer, c);
 
         c.gridy = 1;
@@ -159,7 +169,8 @@ public class FullMediaView extends BaseView {
         Box buttonBox = Box.createHorizontalBox();
 
         JButton backButton = createSimpleButton("Back");
-        backButton.addActionListener(e -> guiController.setView(guiController.getFrontPage().getContainer()));
+        BaseView backView = previousView == null ? guiController.getFrontPage() : previousView;
+        backButton.addActionListener(e -> guiController.setView(backView));
         buttonBox.add(backButton);
         buttonBox.add(createAddToListButton());
         c.gridy = 3;

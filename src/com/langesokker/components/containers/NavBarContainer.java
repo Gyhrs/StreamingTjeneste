@@ -38,8 +38,7 @@ public class NavBarContainer extends JPanel{
         JButton myListButton = new JButton("My list");
         myListButton.addActionListener(e -> {
             MyListView myListView = new MyListView(guiController.getFrame());
-            Container container = myListView.getContainer();
-            guiController.setView(container);
+            guiController.setView(myListView);
         });
         return myListButton;
     }
@@ -58,7 +57,7 @@ public class NavBarContainer extends JPanel{
         JButton homeButton = new JButton("Home");
         homeButton.addActionListener(e -> {
             guiController.getFrontPage().resetSearch();
-            guiController.setView(guiController.getFrontPage().getContainer());
+            guiController.setView(guiController.getFrontPage());
         });
         return homeButton;
     }

@@ -13,15 +13,22 @@ public class FrontPageView extends BaseView{
     private String query = "";
     private String preferredGenre = "";
     private String preferredMediaType = "";
+    private double preferredMinimumRating = 0.0;
 
     public FrontPageView(JFrame frame) {
         super(frame);
+    }
+
+    @Override
+    public String getViewName() {
+        return "Home";
     }
 
     public void resetSearch(){
         this.query = "";
         this.preferredGenre = "";
         this.preferredMediaType = "";
+        this.preferredMinimumRating = 0;
     }
 
     @Override
@@ -41,6 +48,9 @@ public class FrontPageView extends BaseView{
         JComboBox<String> genresBox = createGenresBox();
         centerNavContainer.add(genresBox);
 
+        JComboBox<Double> ratingBox = createMinimumRatingBox();
+        centerNavContainer.add(ratingBox);
+
         JTextField searchBar = createSearchBar();
         centerNavContainer.add(searchBar);
 
@@ -49,8 +59,9 @@ public class FrontPageView extends BaseView{
             query = searchBar.getText();
             preferredGenre = (String) genresBox.getSelectedItem();
             preferredMediaType = (String) mediaTypesBox.getSelectedItem();
+            preferredMinimumRating = (double) ratingBox.getSelectedItem();
             contentContainer.remove(0);
-            contentContainer.add(FrontPageView.this.updateContentContainer(preferredMediaType, preferredGenre, query));
+            contentContainer.add(FrontPageView.this.updateContentContainer(preferredMediaType, preferredGenre, preferredMinimumRating, query));
             mainPanel.revalidate();
             mainPanel.repaint();
         });
@@ -64,9 +75,19 @@ public class FrontPageView extends BaseView{
         return mainPanel;
     }
 
+    private JComboBox<Double> createMinimumRatingBox() {
+        Double[] ratings = new Double[10];
+        for (int i = 0; i < ratings.length; i++) {
+            ratings[i] = (double) i;
+        }
+        JComboBox<Double> minimumRatingBox = new JComboBox<>(ratings);
+        minimumRatingBox.setEditable(true);
+        minimumRatingBox.setSelectedItem(preferredMinimumRating);
+        return minimumRatingBox;
+    }
+
     private JComboBox<String> createMediaTypesBox() {
         JComboBox<String> mediaTypesBox = new JComboBox<>(SupportedMediaTypes.getMediaTypesArray());
-        mediaTypesBox.setEditable(true);
         if(!preferredMediaType.trim().equals("")){
             mediaTypesBox.setSelectedItem(preferredMediaType);
         }
@@ -75,7 +96,6 @@ public class FrontPageView extends BaseView{
 
     private JComboBox<String> createGenresBox() {
         JComboBox<String> genresBox = new JComboBox<>(mediaController.getKnownGenres());
-        genresBox.setEditable(true);
         if(!preferredGenre.trim().equals("")){
             genresBox.setSelectedItem(preferredGenre);
         }
@@ -98,17 +118,17 @@ public class FrontPageView extends BaseView{
      * Updaterer hele panelet ud fra
      */
     private JScrollPane updateContentContainer(){
-        return updateContentContainer(preferredMediaType,preferredGenre,query);
+        return updateContentContainer(preferredMediaType,preferredGenre,preferredMinimumRating,query);
     }
 
     /**
      * Updaterer containeren af medier baseret på den string af karakterer man søger efter
      */
-    private JScrollPane updateContentContainer(String mediaTypeString, String genre, String query){
+    private JScrollPane updateContentContainer(String mediaTypeString, String genre, double minimumRating, String query){
         JPanel panel = new JPanel();
         JScrollPane scrollPane = new JScrollPane(panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
-        MediaLoaderTask task = new MediaLoaderTask(panel, mediaController.getMediaMap(), mediaTypeString, genre, query);
+        MediaLoaderTask task = new MediaLoaderTask(panel, mediaController.getMediaMap(), mediaTypeString, genre, minimumRating, query);
         task.execute();
 
         return scrollPane;

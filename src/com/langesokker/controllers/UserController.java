@@ -43,7 +43,7 @@ public class UserController {
         if(this.currentUser.equals(user)) return;
         this.currentUser = user;
         guiController.resetFrontPage();
-        guiController.setView(guiController.getFrontPage().getContainer());
+        guiController.setView(guiController.getFrontPage());
     }
 
     public User getCurrentUser(){

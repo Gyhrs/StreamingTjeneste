@@ -18,14 +18,16 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
     String mediaTypeString;
     String genre;
     String query;
+    double minimumRating;
     JPanel panel;
     int item = 0;
 
-    public MediaLoaderTask(JPanel panel, Map<SupportedMediaTypes, List<Media>> availableMedia, String mediaTypeString, String genre, String query){
+    public MediaLoaderTask(JPanel panel, Map<SupportedMediaTypes, List<Media>> availableMedia, String mediaTypeString, String genre, double minimumRating, String query){
         this.availableMedia = availableMedia;
         this.mediaTypeString = mediaTypeString;
         this.genre = genre;
         this.query = query;
+        this.minimumRating = minimumRating;
 
         this.panel = panel;
         this.panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
@@ -65,7 +67,7 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
                         continue;
                     }
                 }
-
+                if(media.getRating() < minimumRating) continue;
                 if(!media.getName().toLowerCase().contains(query.toLowerCase()) && !query.equals("")){
                     continue;
                 }

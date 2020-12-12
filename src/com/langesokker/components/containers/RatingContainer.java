@@ -9,16 +9,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-public class RatingContainer extends Box {
+public class RatingContainer extends JComponent {
 
     public RatingContainer(Media media) {
         this(media, true);
     }
 
     public RatingContainer(Media media, boolean frontPage) {
-        super(BoxLayout.LINE_AXIS);
-       /* FlowLayout layout = new FlowLayout(alignment, 0, 20);
-        layout.setAlignOnBaseline(true);*/
+        this.setLayout(frontPage ? new FlowLayout(FlowLayout.RIGHT, 0, 20) : new BoxLayout(this, BoxLayout.LINE_AXIS));
+
         this.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()));
         this.setOpaque(false);
         JText ratingText = new JText(((!frontPage ? "Rating: " : "") + media.getRating()), 15, true, Colors.WHITE.getColor());

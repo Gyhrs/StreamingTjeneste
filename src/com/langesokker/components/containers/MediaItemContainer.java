@@ -5,6 +5,7 @@ import com.langesokker.components.TransparentJPanel;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
+import com.langesokker.views.BaseView;
 import com.langesokker.views.FullMediaView;
 
 import javax.swing.*;
@@ -19,11 +20,13 @@ public class MediaItemContainer extends JPanel{
     String name;
     BufferedImage image;
     private final GUIController guiController = GUIController.getInstance();
+    private final BaseView currentView;
 
-    public MediaItemContainer(Media media){
+    public MediaItemContainer(Media media, BaseView currentView){
         this.media = media;
         this.name = media.getName();
         this.image = MediaController.getInstance().getMediaImage(media);
+        this.currentView = currentView;
 
         this.setOpaque(false);
         this.setLayout(new OverlayLayout(this));
@@ -32,6 +35,10 @@ public class MediaItemContainer extends JPanel{
 
         this.add(createOverlayPanel());
         this.add(createBackgroundContainer());
+    }
+
+    public MediaItemContainer(Media media){
+        this(media, null);
     }
 
     private Container createBackgroundContainer() {
@@ -62,7 +69,7 @@ public class MediaItemContainer extends JPanel{
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() != MouseEvent.BUTTON1) return;
-                guiController.setView(new FullMediaView(guiController.getFrame(), media).getContainer());
+                guiController.setView(new FullMediaView(guiController.getFrame(), media, currentView));
             }
 
             @Override

@@ -1,5 +1,6 @@
 package com.langesokker.controllers;
 
+import com.langesokker.views.BaseView;
 import com.langesokker.views.FrontPageView;
 
 import javax.swing.*;
@@ -27,6 +28,7 @@ public class GUIController {
      * Synliggør framen og samler de diverse komponenter til at blive
      * */
     public void display(){
+        frame.setTitle(this.generateTitle(frontPage));
         frame.pack();
         frame.setVisible(true);
     }
@@ -46,11 +48,18 @@ public class GUIController {
         return frame;
     }
 
-    public void setView(Container container){
+    public void setView(BaseView view){
+        Container container = view.getContainer();
         frame.getContentPane().removeAll();
         frame.setContentPane(container);
         frame.revalidate();
         frame.repaint();
+        frame.setTitle(generateTitle(view));
+
+    }
+
+    private String generateTitle(BaseView view){
+        return "Lange sokker streaming - " + view.getViewName();
     }
 
     public void resetFrontPage(){

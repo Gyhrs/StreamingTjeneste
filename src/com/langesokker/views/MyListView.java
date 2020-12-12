@@ -17,6 +17,11 @@ public class MyListView extends BaseView {
         super(frame);
     }
 
+    @Override
+    public String getViewName() {
+        return "My list";
+    }
+
     /**
      * Fills a panel with MediaItemView of the medias in User's list
      * @return a scrollable panel with all media in User's List
@@ -38,7 +43,7 @@ public class MyListView extends BaseView {
                     rowContainer.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 5));
 
                 }
-                rowContainer.add(new MediaItemContainer(media));
+                rowContainer.add(new MediaItemContainer(media, this));
                 item++;
             }
         mainPanel.add(new NavBarContainer(new Container()), BorderLayout.NORTH);
