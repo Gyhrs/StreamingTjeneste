@@ -81,7 +81,6 @@ public class FrontPageView extends BaseView{
             ratings[i] = (double) i;
         }
         JComboBox<Double> minimumRatingBox = new JComboBox<>(ratings);
-        minimumRatingBox.setEditable(true);
         minimumRatingBox.setSelectedItem(preferredMinimumRating);
         return minimumRatingBox;
     }

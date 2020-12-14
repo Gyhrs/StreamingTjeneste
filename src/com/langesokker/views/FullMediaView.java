@@ -14,7 +14,7 @@ import com.langesokker.media.Seasonable;
 import com.langesokker.models.User;
 import com.langesokker.utils.Colors;
 import com.langesokker.utils.ImageUtils;
-import com.sun.xml.internal.rngom.parse.host.Base;
+
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -31,9 +31,12 @@ public class FullMediaView extends BaseView {
     private final UserController userController = UserController.getInstance();
     private final BaseView previousView;
 
-    public FullMediaView(JFrame frame, Media media){
-        this(frame, media, null);
-    }
+    /**
+     *
+     * @param frame
+     * @param media
+     * @param previousView -
+     */
     public FullMediaView(JFrame frame, Media media, BaseView previousView) {
         super(frame);
         this.media = media;
