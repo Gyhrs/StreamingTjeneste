@@ -8,7 +8,7 @@ public abstract class Media {
     protected String[] genres;
     protected int releaseDate;
     protected double rating;
-    protected boolean inList;
+    protected final boolean inList;
 
     public Media(String name, int releaseDate, String[] genre, double rating) {
         this.name = name;

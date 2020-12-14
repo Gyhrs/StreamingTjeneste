@@ -7,12 +7,11 @@ import com.langesokker.utils.ImageUtils;
 
 import javax.swing.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.*;
 
 public class MediaController {
@@ -75,7 +74,7 @@ public class MediaController {
     /**
      * Denne funktion går igennem alle filerne i /data/media/ mappen og indlæser dem med MediaController#loadFile(String fileName) funktionen.
      */
-    public void loadAllMediaTypes() throws URISyntaxException {
+    public void loadAllMediaTypes() {
         for(SupportedMediaTypes mediaType : SupportedMediaTypes.values()){
             loadFile(mediaType, mediaType.getFileName());
         }

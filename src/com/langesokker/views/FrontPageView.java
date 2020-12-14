@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 public class FrontPageView extends BaseView{
     private final MediaController mediaController = MediaController.getInstance();
@@ -58,7 +57,6 @@ public class FrontPageView extends BaseView{
         searchBar.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                System.out.println(e.getKeyChar());
                 if(e.getKeyCode() == KeyEvent.VK_ENTER) search(searchBar, genresBox, mediaTypesBox, ratingBox, contentContainer, mainPanel);}
         });
         centerNavContainer.add(searchBar);

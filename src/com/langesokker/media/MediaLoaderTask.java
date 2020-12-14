@@ -14,13 +14,13 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
 
     private final GUIController guiController = GUIController.getInstance();
 
-    Map<SupportedMediaTypes, List<Media>> availableMedia;
-    String mediaTypeString;
-    String genre;
-    String query;
-    double minimumRating;
-    JPanel panel;
-    int item = 0;
+    private final Map<SupportedMediaTypes, List<Media>> availableMedia;
+    private final String mediaTypeString;
+    private final String genre;
+    private final String query;
+    private final double minimumRating;
+    private final JPanel panel;
+    private int item = 0;
 
     public MediaLoaderTask(JPanel panel, Map<SupportedMediaTypes, List<Media>> availableMedia, String mediaTypeString, String genre, double minimumRating, String query){
         this.availableMedia = availableMedia;

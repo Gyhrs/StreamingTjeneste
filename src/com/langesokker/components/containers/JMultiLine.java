@@ -1,14 +1,11 @@
 package com.langesokker.components.containers;
 
-import com.langesokker.components.JText;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class JMultiLine extends JTextArea {
 
-    Color color;
-    String fontName = "Lucida Sans";
+    private Color color;
     boolean isBold = false;
     int fontSize = 12;
 
@@ -37,6 +34,7 @@ public class JMultiLine extends JTextArea {
 
         if(color == null) super.setForeground(Color.WHITE);
         else super.setForeground(color);
+        String fontName = "Lucida Sans";
         super.setFont(new Font(fontName, isBold ? Font.BOLD : Font.PLAIN, fontSize));
         super.paintComponent(g);
     }

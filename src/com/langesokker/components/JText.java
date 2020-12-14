@@ -7,7 +7,6 @@ public class JText extends JLabel {
 
     private final int fontSize;
     private boolean isBold = false;
-    String fontName = "Lucida Sans";
     Color color;
 
     /**
@@ -85,6 +84,7 @@ public class JText extends JLabel {
     protected void paintComponent(Graphics g) {
         if(color == null) super.setForeground(Color.WHITE);
         else super.setForeground(color);
+        String fontName = "Lucida Sans";
         super.setFont(new Font(fontName, isBold ? Font.BOLD : Font.PLAIN, fontSize));
         super.paintComponent(g);
     }

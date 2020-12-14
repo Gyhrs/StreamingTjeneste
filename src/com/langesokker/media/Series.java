@@ -4,8 +4,8 @@ import java.util.Map;
 
 public class Series extends Media implements Seasonable{
     Map<Integer, Integer> seasons;
-    int endDate;
-    boolean isStillAiring;
+    private final int endDate;
+    private final boolean isStillAiring;
 
     public Series(String name, int releaseDate, int endDate, boolean isStillAiring, String[] genre, double rating, Map<Integer, Integer> seasons){
         super(name, releaseDate, genre, rating);

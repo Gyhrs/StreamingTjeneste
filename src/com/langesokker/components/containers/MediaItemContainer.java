@@ -17,9 +17,9 @@ import java.awt.image.BufferedImage;
 
 public class MediaItemContainer extends JPanel{
 
-    Media media;
-    String name;
-    BufferedImage image;
+    private final Media media;
+    private final String name;
+    private final BufferedImage image;
     private final GUIController guiController = GUIController.getInstance();
     private final BaseView currentView;
 
