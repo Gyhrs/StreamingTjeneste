@@ -5,6 +5,7 @@ import com.langesokker.components.TransparentJPanel;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.media.Media;
+import com.langesokker.utils.Colors;
 import com.langesokker.views.BaseView;
 import com.langesokker.views.FullMediaView;
 
@@ -44,22 +45,28 @@ public class MediaItemContainer extends JPanel{
     private Container createBackgroundContainer() {
         Container backgroundContainer = new Container();
         backgroundContainer.setLayout(new BorderLayout());
-        backgroundContainer.setPreferredSize(new Dimension(140,224));
+        backgroundContainer.setPreferredSize(new Dimension(140,209));
         backgroundContainer.add(new JLabel(new ImageIcon(image)), BorderLayout.CENTER);
         return backgroundContainer;
     }
 
     private JPanel createOverlayPanel() {
-        JPanel overlayPanel = new TransparentJPanel(1f, new Color(0,0,0, 10));
-        overlayPanel.setLayout(new BorderLayout());
-        overlayPanel.setPreferredSize(new Dimension(140,224));
+        JPanel overlayPanel = new TransparentJPanel(.5f, new Color(0,0,0));
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(140,229));
 
         JText text = new JText(String.format("<html><div style=\"width:%dpx; text-align:center;\">%s</div></html>", 100, name),20,true, Color.WHITE);
         text.setHorizontalAlignment(JLabel.CENTER);
         text.setVerticalAlignment(JLabel.CENTER);
-
-        overlayPanel.add(text, BorderLayout.CENTER);
-        overlayPanel.add(new RatingContainer(media), BorderLayout.SOUTH);
+        text.setOpaque(false);
+        panel.add(text, BorderLayout.CENTER);
+        RatingContainer ratingContainer = new RatingContainer(media);
+        ratingContainer.setOpaque(false);
+        ratingContainer.setBackground(Colors.SECONDARY_DARK.getColor());
+        panel.add(ratingContainer, BorderLayout.SOUTH);
+        panel.setOpaque(false);
+        overlayPanel.add(panel);
         overlayPanel.setVisible(false);
 
         this.addMouseListener(new MouseListener() {
@@ -78,13 +85,11 @@ public class MediaItemContainer extends JPanel{
             @Override
             public void mouseEntered(MouseEvent e) {
                 overlayPanel.setVisible(true);
-                repaint();
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
                 overlayPanel.setVisible(false);
-                repaint();
             }
         });
         return overlayPanel;

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public abstract class BaseView {
 
-    protected JFrame frame;
+    protected final JFrame frame;
     private String viewName;
 
     public BaseView(JFrame frame) {

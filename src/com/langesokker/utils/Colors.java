@@ -7,7 +7,7 @@ public enum Colors {
     SECONDARY_DARK(new Color(61,61,61)),
     WHITE(Color.WHITE);
 
-    Color color;
+    private final Color color;
 
     Colors(Color color){
         this.color = color;

@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class JText extends JLabel {
 
-    private int fontSize;
+    private final int fontSize;
     private boolean isBold = false;
     String fontName = "Lucida Sans";
     Color color;

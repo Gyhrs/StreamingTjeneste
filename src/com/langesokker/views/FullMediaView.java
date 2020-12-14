@@ -32,10 +32,10 @@ public class FullMediaView extends BaseView {
     private final BaseView previousView;
 
     /**
-     *
-     * @param frame
-     * @param media
-     * @param previousView -
+     * FullMediaView er siden som viser alt infoet om et givent medie.
+     * @param frame = Den nuværrende frame
+     * @param media = Mediet som skal vises
+     * @param previousView = Siden brugeren kom fra. (Nullable)
      */
     public FullMediaView(JFrame frame, Media media, BaseView previousView) {
         super(frame);
@@ -43,6 +43,10 @@ public class FullMediaView extends BaseView {
         this.previousView = previousView;
     }
 
+    /**
+     * Returnere title navnet
+     * @return View name
+     */
     @Override
     public String getViewName() {
         return media.getName();
@@ -50,6 +54,7 @@ public class FullMediaView extends BaseView {
 
     /**
      *
+     * @return Containeren til siden
      */
     @Override
     public Container getContainer() {
@@ -59,18 +64,23 @@ public class FullMediaView extends BaseView {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.weighty = 1;
+        c.fill = GridBagConstraints.VERTICAL;
+        c.weightx = 0;
+        c.weighty = 0;
         mainPanel.setBackground(Colors.SECONDARY_DARK.getColor());
 
         c.gridx = 0;
         c.gridy = 0;
+        c.anchor = GridBagConstraints.CENTER;
         JPanel imagePanel = createImagePanel();
+        imagePanel.setSize(new Dimension(300, (int) imagePanel.getPreferredSize().getHeight()));
         mainPanel.add(imagePanel, c);
 
+        c.weightx = 1;
+        c.weighty = 1;
         c.gridx = 1;
         c.gridy = 0;
+        c.anchor = GridBagConstraints.LINE_END;
 
         JPanel infoPanel = createInfoPanel();
         infoPanel.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -83,6 +93,7 @@ public class FullMediaView extends BaseView {
 
     private JButton createSimpleButton(String text) {
         JButton button = new JButton(text);
+        button.setOpaque(true);
         button.setForeground(Color.BLACK);
         button.setBackground(Color.WHITE);
         Border line = new LineBorder(Color.BLACK);
@@ -130,8 +141,8 @@ public class FullMediaView extends BaseView {
 
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        c.weightx = 1;
-        c.weighty = 1;
+        c.weightx = 0.5;
+        c.weighty = 0.5;
         c.gridx = 0;
         c.gridy = 0;
         c.gridheight = 1;

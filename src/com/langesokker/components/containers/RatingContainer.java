@@ -19,7 +19,7 @@ public class RatingContainer extends JComponent {
         this.setLayout(frontPage ? new FlowLayout(FlowLayout.RIGHT, 0, 20) : new BoxLayout(this, BoxLayout.LINE_AXIS));
 
         this.setMaximumSize(new Dimension(this.getWidth(), this.getHeight()));
-        this.setOpaque(false);
+        this.setOpaque(frontPage);
         JText ratingText = new JText(((!frontPage ? "Rating: " : "") + media.getRating()), 15, true, Colors.WHITE.getColor());
         this.add(ratingText);
 

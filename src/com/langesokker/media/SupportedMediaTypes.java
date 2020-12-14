@@ -4,7 +4,6 @@ import java.util.*;
 
 /**
  * Denne enum register hvilke typer af medier som vores program supporter.
- * TODO: SE OM NOGLE AF METHODERNE KAN FORKORTES ELLER DELE KODE
  */
 public enum SupportedMediaTypes {
 
