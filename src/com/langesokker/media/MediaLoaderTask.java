@@ -1,5 +1,6 @@
 package com.langesokker.media;
 
+import com.langesokker.components.ErrorPopup;
 import com.langesokker.components.containers.MediaItemContainer;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.utils.Colors;
@@ -39,6 +40,9 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
     protected void done() {
         super.done();
         guiController.getFrame().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+        if(item == 0){
+            new ErrorPopup(new JFrame(), "Nothing found", "The search gave no results", false);
+        }
     }
 
     @Override

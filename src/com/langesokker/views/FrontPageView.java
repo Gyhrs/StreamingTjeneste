@@ -138,7 +138,6 @@ public class FrontPageView extends BaseView{
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
         MediaLoaderTask task = new MediaLoaderTask(panel, mediaController.getMediaMap(), mediaTypeString, genre, minimumRating, query);
         task.execute();
-
         return scrollPane;
     }
 

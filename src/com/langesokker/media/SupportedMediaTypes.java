@@ -30,7 +30,10 @@ public enum SupportedMediaTypes {
             }
         }
         return new Series(name, releaseDate, endDate, airing, genre, rating, seasons);
-    });
+    }),
+    TEST("test.txt","", (name, releaseDate, endDate, genre, rating, extraData) -> {
+        return new Film(name, releaseDate, genre, rating);
+    }, true);
 
     /**
      * Koden til at generere den specifikke medie type
@@ -38,6 +41,10 @@ public enum SupportedMediaTypes {
     private final MediaGenerator generator;
 
     private String fileName;
+    /**
+     * Den her boolean bestemmer om typen skal automatisk loades. Det bruges til at ingnorere test typen
+     */
+    private boolean ignoreLoad;
 
     /**
      * Navnet for mappen med billederne/thumbnails for denne type medier
@@ -53,6 +60,16 @@ public enum SupportedMediaTypes {
         this.fileName = fileName;
         this.imageFolderName = imageFolderName;
         this.generator = generator;
+    }
+
+    /**
+     * Overloadet Konstruktør
+     * @param imageFolderName = mappen med den ønskede medietype;
+     * @param generator = variable til at kunne skelne mellem de forskellige medietyper
+     */
+    SupportedMediaTypes(String fileName, String imageFolderName, MediaGenerator generator, boolean ignoreLoad){
+        this(fileName, imageFolderName, generator);
+        this.ignoreLoad = ignoreLoad;
     }
 
     /**
@@ -121,5 +138,13 @@ public enum SupportedMediaTypes {
             mediaTypes.add(types.name());
         }
         return mediaTypes.toArray(new String[]{});
+    }
+
+    /**
+     * Se variablen ignoreload
+     * @return = Om MediaControlleren automatisk skal ignorere typen. Dette bruges til test. Hvis TRUE så vil den ikke automatisk blive loadet.
+     */
+    public boolean shouldIgnoreLoad(){
+        return this.ignoreLoad;
     }
 }

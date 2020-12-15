@@ -31,18 +31,19 @@ public class MediaController {
     }
 
     /**
-     * Tilfoejer et medie m til listen af film
+     * Tilfoejer et medie til listen af film
+     * @param type = typen = medie typen
      * @param media = Det medie man gerne vil tilføje til mappen
      */
-    public void addMedia(Media media){
+    public void addMedia(SupportedMediaTypes type, Media media){
         List<Media> medias;
-        if(mediaMap.containsKey(media.getType())){
-            medias = mediaMap.get(media.getType());
+        if(mediaMap.containsKey(type)){
+            medias = mediaMap.get(type);
         }else{
             medias = new ArrayList<>();
         }
         medias.add(media);
-        this.mediaMap.put(media.getType(), medias);
+        this.mediaMap.put(type, medias);
     }
 
     /**
@@ -76,6 +77,7 @@ public class MediaController {
      */
     public void loadAllMediaTypes() {
         for(SupportedMediaTypes mediaType : SupportedMediaTypes.values()){
+            if(mediaType.shouldIgnoreLoad()) continue; //Ignore test types
             loadFile(mediaType, mediaType.getFileName());
         }
     }
@@ -84,7 +86,7 @@ public class MediaController {
      * Indlæser al data fra en given fil. Medie typen bliver valgt ud fra fil navn
      * @param filename = Navnet på filen med dataen (Inkl. fil format)
      */
-    public void loadFile(SupportedMediaTypes mediaType, String filename) {
+    public boolean loadFile(SupportedMediaTypes mediaType, String filename) {
         //Handles no file exception
         String mediaTypeString = filename.substring(0, filename.indexOf(".")).toUpperCase();
 
@@ -92,7 +94,7 @@ public class MediaController {
         InputStream in = getClass().getClassLoader().getResourceAsStream(basePath + filename);
         if(in == null){
             new ErrorPopup(new JFrame(), "Failed to load", "Failed to load mediatype " + mediaTypeString + " data", true);
-            return;
+            return false;
         }
         BufferedReader reader = null;
         try {
@@ -114,12 +116,13 @@ public class MediaController {
                     }
                 });
                 System.out.println(media);
-                addMedia(media);
+                addMedia(mediaType, media);
             }
+            return true;
         } catch (IOException e) {
-
             new ErrorPopup(new JFrame(), "Failed load", "Failed loading " + mediaTypeString, true);
             e.printStackTrace(); //For console
+            return false;
         } finally {
             if (reader != null) {
                 try {

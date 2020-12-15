@@ -1,5 +1,6 @@
 package com.langesokker.views;
 
+import com.langesokker.components.ErrorPopup;
 import com.langesokker.components.containers.MediaItemContainer;
 import com.langesokker.components.containers.NavBarContainer;
 import com.langesokker.controllers.UserController;
@@ -48,7 +49,10 @@ public class MyListView extends BaseView {
             }
         mainPanel.add(new NavBarContainer(new Container()), BorderLayout.NORTH);
         panel.add(rowContainer);
-
+        if(item == 0){
+            new ErrorPopup(frame, "Empty list", "You have not added anything to your list yet", false);
+            
+        }
         JScrollPane scrollPane = new JScrollPane(panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
 

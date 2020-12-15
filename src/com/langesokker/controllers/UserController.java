@@ -15,9 +15,9 @@ public class UserController {
     public UserController() {
         this.users = new ArrayList<>();
         //TODO: RET NAVNE
-        users.add(new User("Super Dan", 34));
-        users.add(new User("Claus Ildebrand", 31));
-        users.add(new User("Smilende Signe", 32));
+        this.addUser(new User("Super Dan", 34));
+        this.addUser(new User("Claus Ildebrand", 31));
+        this.addUser(new User("Smilende Signe", 32));
         this.currentUser = users.get(0);
         this.guiController = GUIController.getInstance();
     }
@@ -48,5 +48,13 @@ public class UserController {
 
     public User getCurrentUser(){
         return currentUser;
+    }
+
+    public void addUser(User user){
+        users.add(user);
+    }
+
+    public void removeUser(User user){
+        users.remove(user);
     }
 }
