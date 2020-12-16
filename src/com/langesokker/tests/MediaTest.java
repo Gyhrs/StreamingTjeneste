@@ -24,7 +24,6 @@ public class MediaTest {
     public void after(){
         mediaController.getMediaMap().remove(SupportedMediaTypes.TEST);
         mediaController = null;
-        System.out.println("tre");
     }
 
     @Test

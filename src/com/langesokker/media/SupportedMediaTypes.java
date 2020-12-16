@@ -135,6 +135,7 @@ public enum SupportedMediaTypes {
         List<String> mediaTypes = new ArrayList<>();
         mediaTypes.add("All media");
         for (SupportedMediaTypes types : SupportedMediaTypes.values()) {
+            if(types.ignoreLoad) continue;
             mediaTypes.add(types.name());
         }
         return mediaTypes.toArray(new String[]{});
