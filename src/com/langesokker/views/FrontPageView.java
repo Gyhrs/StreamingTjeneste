@@ -123,14 +123,14 @@ public class FrontPageView extends BaseView{
     }
 
     /**
-     * Updaterer hele panelet ud fra
+     * Updaterer hele panelet ud fra standard parameter
      */
     private JScrollPane updateContentContainer(){
         return updateContentContainer(preferredMediaType,preferredGenre, getMinimumRating(),query);
     }
 
     /**
-     * Updaterer containeren af medier baseret på den string af karakterer man søger efter
+     * Updaterer containeren af medier baseret på den string af karakterer man søger efter og ønskede minimum rating
      */
     private JScrollPane updateContentContainer(String mediaTypeString, String genre, double minimumRating, String query){
         JPanel panel = new JPanel();

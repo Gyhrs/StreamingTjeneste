@@ -2,12 +2,27 @@ package com.langesokker.components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class ErrorPopup extends JDialog{
 
     public ErrorPopup(JFrame frame, String title, String message, boolean exitOnOk){
         super(frame, title);
         super.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        WindowListener exitListener = new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                setVisible(false);
+                if(exitOnOk){
+                    System.exit(0);
+                }
+            }
+        };
+        this.addWindowListener(exitListener);
+
         this.setLayout(new BorderLayout());
         //Also print message to console
         System.out.println("Error: " + message);
