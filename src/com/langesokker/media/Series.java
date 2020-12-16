@@ -39,6 +39,11 @@ public class Series extends Media implements Seasonable{
     }
 
     @Override
+    public String getDateString() {
+        return releaseDate + "-" +  (isStillAiring ? "" : endDate);
+    }
+
+    @Override
     public Integer[] getEpisodesInSeason(int seasonNum) {
         int episodes = seasons.get(seasonNum);
         Integer[] episodeArray = new Integer[episodes];

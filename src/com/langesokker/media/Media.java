@@ -52,6 +52,7 @@ public abstract class Media {
 
     public abstract SupportedMediaTypes getType();
 
+    public abstract String getDateString();
 
     @Override
     public String toString() {

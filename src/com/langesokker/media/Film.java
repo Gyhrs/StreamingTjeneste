@@ -11,4 +11,9 @@ public class Film extends Media{
         return SupportedMediaTypes.FILM;
     }
 
+    @Override
+    public String getDateString() {
+        return releaseDate + "";
+    }
+
 }

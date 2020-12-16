@@ -165,7 +165,7 @@ public class FullMediaView extends BaseView {
         c.gridy = 1;
         c.gridx = 2;
         c.gridwidth = 1;
-        infoPanel.add(new JText("Release date: " + media.getReleaseDate(), 20, false, Colors.WHITE.getColor()), c);
+        infoPanel.add(new JText("Date: " + media.getDateString(), 20, false, Colors.WHITE.getColor()), c);
         c.gridy = 1;
         c.gridx = 3;
         c.gridwidth = GridBagConstraints.REMAINDER;
