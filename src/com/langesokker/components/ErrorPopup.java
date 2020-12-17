@@ -8,6 +8,13 @@ import java.awt.event.WindowListener;
 
 public class ErrorPopup extends JDialog{
 
+    /**
+     * Kontruktør til en ErrorPopup som er en hjælpe klasse som extender JDialog
+     * @param frame = hvilken frame skal den displays i? new JFrame() for nyt vindue
+     * @param title = Titlen på dialogen
+     * @param message = Beskeden til brugeren
+     * @param exitOnOk = Skal den lukke programmet når der er blevet trykket ok/exit?
+     */
     public ErrorPopup(JFrame frame, String title, String message, boolean exitOnOk){
         super(frame, title);
         super.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

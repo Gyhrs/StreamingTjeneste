@@ -14,6 +14,10 @@ public class PlayButton extends JButton{
 
     boolean isPlaying = false;
 
+    /**
+     * Konstruktør til PlayButton
+     * Dette er en hjælpe klasse for at gøre koden mere overskuelig
+     */
     public PlayButton(){
         this.setBorder(new EmptyBorder(0,0,0,0));
         this.setBorderPainted(false);

@@ -10,6 +10,13 @@ public abstract class Media {
     protected double rating;
     protected final boolean inList;
 
+    /**
+     * Kontrukt&oslash;r af Media
+     * @param name = Navnet p&aring; mediet
+     * @param releaseDate = Udgivelses&aring;ret
+     * @param genre = Genrene som passer til mediet
+     * @param rating = Anmeldelsen af mediet
+     */
     public Media(String name, int releaseDate, String[] genre, double rating) {
         this.name = name;
         this.genres = genre;
@@ -18,40 +25,40 @@ public abstract class Media {
         this.inList = false;
     }
 
+    /**
+     * Getter metode til at få anmeldelsen af mediet
+     * @return Double - Anmeldelsen
+     */
     public double getRating() {
         return rating;
     }
 
-    public int getReleaseDate() {
-        return releaseDate;
-    }
-
+    /**
+     * Getter metode til at få genrene som passer til mediet
+     * @return String[] - Array af genre
+     */
     public String[] getGenres() {
         return genres;
     }
 
+    /**
+     * Getter metode til at få navnet på mediet
+     * @return String - Navn
+     */
     public String getName() {
         return name;
     }
 
-    public void setGenres(String[] genres) {
-        this.genres = genres;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public void setReleaseDate(int releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
+    /**
+     * Getter metode til at f&aring; medietypen
+     * @return SupportedMediaTypes
+     */
     public abstract SupportedMediaTypes getType();
 
+    /**
+     * Getter metode til at f&aring; datoer som er vigtige for filme
+     * @return releaseDate += "x"
+     */
     public abstract String getDateString();
 
     @Override
@@ -66,6 +73,7 @@ public abstract class Media {
     }
     /**
         * Samler alle genre fra genre arrayet og sætter , + mellemrum imellem hver string fra arrayet
+     * @return List of genres
      */
     public String genresToString(){
         StringJoiner sj = new StringJoiner(", ");

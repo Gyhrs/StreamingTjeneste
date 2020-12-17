@@ -11,8 +11,8 @@ import com.langesokker.views.FullMediaView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 public class MediaItemContainer extends JPanel{
@@ -23,6 +23,11 @@ public class MediaItemContainer extends JPanel{
     private final GUIController guiController = GUIController.getInstance();
     private final BaseView currentView;
 
+    /**
+     * Konstrukt&oslash;r af MediaItemContainer
+     * @param media = Det medie som skal vises
+     * @param currentView = Det nuv&aelig;rrene view
+     */
     public MediaItemContainer(Media media, BaseView currentView){
         this.media = media;
         this.name = media.getName();
@@ -38,10 +43,10 @@ public class MediaItemContainer extends JPanel{
         this.add(createBackgroundContainer());
     }
 
-    public MediaItemContainer(Media media){
-        this(media, null);
-    }
-
+    /**
+     * Hj&aelig;lpe metode til at f&aring; genereret en background
+     * @return Container
+     */
     private Container createBackgroundContainer() {
         Container backgroundContainer = new Container();
         backgroundContainer.setLayout(new BorderLayout());
@@ -50,6 +55,10 @@ public class MediaItemContainer extends JPanel{
         return backgroundContainer;
     }
 
+    /**
+     * Hj&aelig;lpe metode til at f&aring; genereret et overlay
+     * @return JPanel
+     */
     private JPanel createOverlayPanel() {
         JPanel overlayPanel = new TransparentJPanel(.5f, new Color(0,0,0));
         overlayPanel.setLayout(new BorderLayout());
@@ -67,18 +76,12 @@ public class MediaItemContainer extends JPanel{
         overlayPanel.setOpaque(false);
         overlayPanel.setVisible(false);
 
-        this.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {}
-
+        this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 if(e.getButton() != MouseEvent.BUTTON1) return;
                 guiController.setView(new FullMediaView(guiController.getFrame(), media, currentView));
             }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {}
 
             @Override
             public void mouseEntered(MouseEvent e) {

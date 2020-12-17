@@ -11,7 +11,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
 import java.util.*;
 
 public class MediaController {
@@ -19,21 +18,28 @@ public class MediaController {
     private final Map<SupportedMediaTypes, List<Media>> mediaMap;
     private final List<String> knownGenres;
 
+    /**
+     * Konstrukt&oslash;r af MediaController
+     */
     public MediaController(){
         this.mediaMap = new HashMap<>();
         this.knownGenres = new ArrayList<>();
         this.knownGenres.add("All genres");
     }
 
+    /**
+     * Laver en singleton af MediaControlleren hvis den ikke findes i forvejen
+     * @return = MediaController singletong
+     */
     public static MediaController getInstance() {
         if(instance == null) instance = new MediaController();
         return instance;
     }
 
     /**
-     * Tilfoejer et medie til listen af film
+     * Tilf&oslash;jer et medie til listen af film
      * @param type = typen = medie typen
-     * @param media = Det medie man gerne vil tilføje til mappen
+     * @param media = Det medie man gerne vil tilf&oslash;je til mappen
      */
     public void addMedia(SupportedMediaTypes type, Media media){
         List<Media> medias;
@@ -55,7 +61,7 @@ public class MediaController {
     }
 
     /**
-     * Denne methode checker først om typen findes og bagefter går den igennem listen af mediaer.
+     * Denne methode checker f&oslash;rst om typen findes og bagefter g&aring;r den igennem listen af mediaer.
      * @param media = Det valgte medie man gerne vil finde
      * @return boolean. Medie findes ? TRUE : FALSE;
      */
@@ -65,7 +71,8 @@ public class MediaController {
     }
 
     /**
-     * Brug denne methode til at få det tilhørene billede til mediet, hvis billedet findes.
+     * Brug denne methode til at f&aring; det tilh&oslash;rene billede til mediet, hvis billedet findes.
+     * @param media = Mediet der skal f&aring;s et billede fra
      * @return = BufferedImage ud fra /data/images/[mediaType]/[mediaNavn].jpg Kan returnere null hvis intet billed findes.
      */
     public BufferedImage getMediaImage(Media media) {
@@ -73,7 +80,7 @@ public class MediaController {
     }
 
     /**
-     * Denne funktion går igennem alle filerne i /data/media/ mappen og indlæser dem med MediaController#loadFile(String fileName) funktionen.
+     * Denne funktion g&aring;r igennem alle filerne i /data/media/ mappen og indl&aelig;ser dem med MediaController#loadFile(String fileName) funktionen.
      */
     public void loadAllMediaTypes() {
         for(SupportedMediaTypes mediaType : SupportedMediaTypes.values()){
@@ -83,8 +90,10 @@ public class MediaController {
     }
 
     /**
-     * Indlæser al data fra en given fil. Medie typen bliver valgt ud fra fil navn
-     * @param filename = Navnet på filen med dataen (Inkl. fil format)
+     * Indl&aelig;ser al data fra en given fil. Medie typen bliver valgt ud fra fil navn
+     * @param mediaType = Typen af medie
+     * @param filename = Navnet p&aring; filen med dataen (Inkl. fil format)
+     * @return Successfuld eller ej
      */
     public boolean loadFile(SupportedMediaTypes mediaType, String filename) {
         //Handles no file exception
@@ -134,10 +143,17 @@ public class MediaController {
         }
     }
 
+    /**
+     * Returnere en liste af genre som programmet kender.
+     * @return String[]
+     */
     public String[] getKnownGenres() {
         return knownGenres.toArray(new String[]{});
     }
 
+    /**
+     * @return mediaMap map'en
+     */
     public Map<SupportedMediaTypes, List<Media>> getMediaMap() {
         return mediaMap;
     }

@@ -7,10 +7,21 @@ import java.util.*;
  */
 public enum SupportedMediaTypes {
 
+    /**
+     * Medietypen "film".
+     * Fil navn: film.txt
+     * Billede mappe navn: "film"
+     * Ekstra data: Ingen
+     */
     FILM("film.txt","film", (name, releaseDate, endDate, genre, rating, extraData) -> {
         return new Film(name, releaseDate, genre, rating);
     }),
-
+    /**
+     * Medietypen "serier".
+     * Fil navn: series.txt
+     * Billede mappe navn: "series"
+     * Ekstra data: Om den er afsluttet. Hvis ja, hvorn&aring;r den blev afsluttet og s&aelig;soner og episoder nummere
+     */
     SERIES("series.txt","series", (name, releaseDate, endDate, genre, rating, extraData) -> {
         boolean airing = true;
         if (endDate > 0) {
@@ -49,11 +60,12 @@ public enum SupportedMediaTypes {
     /**
      * Navnet for mappen med billederne/thumbnails for denne type medier
      */
-    private String imageFolderName;
+    private final String imageFolderName;
 
     /**
-     * Konstruktør
-     * @param imageFolderName = mappen med den ønskede medietype;
+     * Konstrukt&oslash;r
+     * @param fileName navnet på data filen
+     * @param imageFolderName = mappen med den &oslash;nskede medietype;
      * @param generator = variable til at kunne skelne mellem de forskellige medietyper
      */
     SupportedMediaTypes(String fileName, String imageFolderName, MediaGenerator generator){
@@ -63,9 +75,11 @@ public enum SupportedMediaTypes {
     }
 
     /**
-     * Overloadet Konstruktør
-     * @param imageFolderName = mappen med den ønskede medietype;
+     * Overloadet Konstrukt&oslash;r
+     * @param fileName = Navnet på data filen
+     * @param imageFolderName = mappen med den &oslash;nskede medietype;
      * @param generator = variable til at kunne skelne mellem de forskellige medietyper
+     * @param ignoreLoad = om systemet skal ignore typen når programmet loades
      */
     SupportedMediaTypes(String fileName, String imageFolderName, MediaGenerator generator, boolean ignoreLoad){
         this(fileName, imageFolderName, generator);
@@ -108,29 +122,34 @@ public enum SupportedMediaTypes {
         return generator.generate(name, releaseDate, endDate, genres, rating, extraData);
     }
 
+    /**
+     * Getter til at f&aring; billede mappe navnet
+     * @return navnet for mappen der indeholder billederne der skal bruges
+     */
     public String getImageFolderName() {
         return imageFolderName;
     }
 
-    public void setImageFolderName(String imageFolderName) {
-        this.imageFolderName = imageFolderName;
-    }
-
+    /**
+     * Getter til fil navnet
+     * @return Navnet p&aring; filen med dataen om medietypen
+     */
     public String getFileName() {
         return fileName;
     }
 
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
 
     /**
-     * En callback interface som bruges til at skabe forskellige måder at generere medier på
+     * En callback interface som bruges til at skabe forskellige m&aring;der at generere medier p&aring;
      */
     public interface MediaGenerator{
         Media generate(String name, int releaseDate, int endDate, String[] genre, double rating, String[] extraData);
     }
 
+    /**
+     * En getter metode til JComboBox
+     * @return en array af medie type navne + "All media"
+     */
     public static String[] getMediaTypesArray() {
         List<String> mediaTypes = new ArrayList<>();
         mediaTypes.add("All media");
@@ -143,7 +162,7 @@ public enum SupportedMediaTypes {
 
     /**
      * Se variablen ignoreload
-     * @return = Om MediaControlleren automatisk skal ignorere typen. Dette bruges til test. Hvis TRUE så vil den ikke automatisk blive loadet.
+     * @return = Om MediaControlleren automatisk skal ignorere typen. Dette bruges til test. Hvis TRUE s&aring; vil den ikke automatisk blive loadet.
      */
     public boolean shouldIgnoreLoad(){
         return this.ignoreLoad;

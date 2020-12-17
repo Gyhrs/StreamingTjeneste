@@ -18,17 +18,29 @@ public class UserTest {
     private UserController userController;
     private User testUser;
 
+    /**
+     * Alt det som skal ske før test
+     */
     @Before
     public void before(){
         userController = UserController.getInstance();
     }
 
+    /**
+     * Cleanup / Alt det som skal ske efter test
+     */
     @After
     public void after(){
         if(testUser != null) userController.removeUser(testUser);
         userController = null;
     }
 
+    /**
+     * En test som prøver at lave en ny bruger og ændre alderen før den tilføjes
+     * Tester om navnet er rigtigt
+     * Tester om alderen er som forventet efter ændring
+     * Tester om antallet er brugere passer efter at have tilføjet brugeren
+     */
     @Test
     public void addUser(){
         testUser = new User("Ruben", 38);

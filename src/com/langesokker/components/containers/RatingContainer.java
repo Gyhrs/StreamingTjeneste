@@ -11,10 +11,19 @@ import java.awt.image.BufferedImage;
 
 public class RatingContainer extends JComponent {
 
+    /**
+     * Overloaded kontrukt&oslash;r til RatingContainer hvor man g&aring;r ud fra at det er p&aring; forsiden den bliver k&oslash;rt
+     * @param media = Mediet som der skal tages udgangspunkt i
+     */
     public RatingContainer(Media media) {
         this(media, true);
     }
 
+    /**
+     * Konstrukt&oslash;r til RatingContainer
+     * @param media = Mediet som der skal tages udgangspunkt i
+     * @param frontPage = Er det p&aring; forsiden det bliver displayed
+     */
     public RatingContainer(Media media, boolean frontPage) {
         this.setLayout(frontPage ? new FlowLayout(FlowLayout.RIGHT, 0, 20) : new BoxLayout(this, BoxLayout.LINE_AXIS));
 

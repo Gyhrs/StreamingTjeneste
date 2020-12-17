@@ -9,7 +9,10 @@ import java.net.URISyntaxException;
 
 public class Main {
 
-    //Main Method that runs the entire project
+    /**
+     * Main Method that runs the entire project
+     * @param args starts argumenter
+     */
     public static void main(String[] args) {
         MediaController.getInstance().loadAllMediaTypes();
         GUIController guicontroller = GUIController.getInstance();

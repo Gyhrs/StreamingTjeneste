@@ -10,6 +10,11 @@ public class TransparentJPanel extends JPanel {
     private final Color color;
 
 
+    /**
+     * Kontrukt&oslash;r til TransparentJPanel
+     * @param panelAlfa = Alpha v&aelig;rdien p&aring; baggrunden
+     * @param color = Farven p&aring; baggrunden
+     */
     public TransparentJPanel(float panelAlfa, Color color) {
         this.panelAlfa = panelAlfa;
         this.color = color;
@@ -17,6 +22,10 @@ public class TransparentJPanel extends JPanel {
     }
 
 
+    /**
+     * Overridet metode
+     * @param g = Graphics
+     */
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -30,6 +39,10 @@ public class TransparentJPanel extends JPanel {
 
     }
 
+    /**
+     * Overridet metode
+     * @param g = Graphics
+     */
     @Override
     protected void paintChildren(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;

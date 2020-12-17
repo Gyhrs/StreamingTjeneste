@@ -15,17 +15,29 @@ public class MediaTest {
 
     private MediaController mediaController;
 
+    /**
+     * Alt det som skal ske før test
+     */
     @Before
     public void before(){
         mediaController = MediaController.getInstance();
     }
 
+    /**
+     * Cleanup / Alt det som skal ske efter test
+     */
     @After
     public void after(){
         mediaController.getMediaMap().remove(SupportedMediaTypes.TEST);
         mediaController = null;
     }
 
+    /**
+     * En test som prøver at loade SupportedMediaTypes.TEST fra test.txt filen.
+     * Der bliver tested om loading var successful
+     * Om medielisten er null
+     * og om størrelsen er som forventet
+     */
     @Test
     public void loadFile(){
         boolean successfulLoad = mediaController.loadFile(SupportedMediaTypes.TEST, "test.txt");
@@ -34,7 +46,6 @@ public class MediaTest {
         assertNotNull(mediaList);
         int expectedSize = 2;
         int size = mediaList.size();
-        System.out.println(size);
         assertEquals(size, expectedSize);
     }
 

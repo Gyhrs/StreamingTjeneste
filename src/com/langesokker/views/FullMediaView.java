@@ -33,7 +33,7 @@ public class FullMediaView extends BaseView {
 
     /**
      * FullMediaView er siden som viser alt infoet om et givent medie.
-     * @param frame = Den nuværrende frame
+     * @param frame = Den nuv&aelig;rrende frame
      * @param media = Mediet som skal vises
      * @param previousView = Siden brugeren kom fra. (Nullable)
      */
@@ -45,7 +45,6 @@ public class FullMediaView extends BaseView {
 
 
     /**
-     *
      * @return Containeren til siden
      */
     @Override
@@ -83,6 +82,11 @@ public class FullMediaView extends BaseView {
         return panel;
     }
 
+    /**
+     * Genererer en JButton med design
+     * @return en JButton med design
+     * @param text teksten som skal st&aring; inde i knappen
+     */
     private JButton createSimpleButton(String text) {
         JButton button = new JButton(text);
         button.setOpaque(true);
@@ -95,6 +99,10 @@ public class FullMediaView extends BaseView {
         return button;
     }
 
+    /**
+     * Genererer venstre side af siden
+     * @return JPanel med indhold
+     */
     private JPanel createImagePanel() {
         JPanel imagePanel = new JPanel();
         imagePanel.setOpaque(false);
@@ -126,6 +134,10 @@ public class FullMediaView extends BaseView {
         return imagePanel;
     }
 
+    /**
+     * Genererer h&oslash;jre side af siden
+     * @return JPanel med indhold
+     */
     private JPanel createInfoPanel() {
         JPanel infoPanel = new JPanel();
         infoPanel.setLayout(new GridBagLayout());
@@ -187,6 +199,10 @@ public class FullMediaView extends BaseView {
     }
 
 
+    /**
+     * Genererer en knap til at tilf&oslash;je en knap
+     * @return Knap til at tilf&oslash;je til ens liste
+     */
     private JButton createAddToListButton() {
         JButton myListButton = createSimpleButton("Add to my list");
         User currentUser = userController.getCurrentUser();

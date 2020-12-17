@@ -8,6 +8,11 @@ import java.awt.*;
 
 public class EpisodeSelectorContainer extends JPanel{
 
+    /**
+     * Konstruk&oslash;r til episode og s&aelig;son v&aelig;lgeren
+     * Denne container bruges til at v&aelig;lge s&aelig;son og episode hvis mediet implementer Seasonable.java
+     * @param seasonable = Et medie som har s&aelig;soner og episoder
+     */
     public EpisodeSelectorContainer(Seasonable seasonable){
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setOpaque(false);

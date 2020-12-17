@@ -17,10 +17,17 @@ public class FrontPageView extends BaseView{
     private String preferredMediaType = "";
     private String preferredMinimumRatingString = "0.0+";
 
+    /**
+     * Konstrukt&oslash;r til FrontPageView
+     * @param frame = Det nuv&aelig;rende frame
+     */
     public FrontPageView(JFrame frame) {
         super(frame, "Home");
     }
 
+    /**
+     * S&aelig;tter s&oslash;gefilteret tilbage til standard
+     */
     public void resetSearch(){
         this.query = "";
         this.preferredGenre = "";
@@ -68,6 +75,15 @@ public class FrontPageView extends BaseView{
         return mainPanel;
     }
 
+    /**
+     * Hj&aelig;lpe metode til at s&oslash;ge
+     * @param searchBar S&oslash;gefeltet
+     * @param genresBox Genre v&aelig;lgeren
+     * @param mediaTypesBox Medietype v&aelig;lgeren
+     * @param ratingBox Minimum rating v&aelig;lgeren
+     * @param contentContainer Indholds containeren
+     * @param mainPanel Hovedpanelet
+     */
     private void search(JTextField searchBar, JComboBox<String> genresBox,JComboBox<String> mediaTypesBox,JComboBox<String> ratingBox, Container contentContainer, JPanel mainPanel){
         query = searchBar.getText();
         preferredGenre = (String) genresBox.getSelectedItem();
@@ -79,6 +95,10 @@ public class FrontPageView extends BaseView{
         mainPanel.repaint();
     }
 
+    /**
+     * Genererer en JComboBox til ratings
+     * @return en JComboBox med ratings muligheder
+     */
     private JComboBox<String> createMinimumRatingBox() {
         String[] ratings = new String[10];
         for (int i = 0; i < ratings.length; i++) {
@@ -89,6 +109,10 @@ public class FrontPageView extends BaseView{
         return minimumRatingBox;
     }
 
+    /**
+     * Genererer en JComboBox til medietyper
+     * @return en JComboBox med medietyper
+     */
     private JComboBox<String> createMediaTypesBox() {
         JComboBox<String> mediaTypesBox = new JComboBox<>(SupportedMediaTypes.getMediaTypesArray());
         if(!preferredMediaType.trim().equals("")){
@@ -97,6 +121,10 @@ public class FrontPageView extends BaseView{
         return mediaTypesBox;
     }
 
+    /**
+     * Genererer en JComboBox til genre
+     * @return en JComboBox med genre muligheder
+     */
     private JComboBox<String> createGenresBox() {
         JComboBox<String> genresBox = new JComboBox<>(mediaController.getKnownGenres());
         if(!preferredGenre.trim().equals("")){
@@ -105,12 +133,20 @@ public class FrontPageView extends BaseView{
         return genresBox;
     }
 
+    /**
+     * Genererer en s&oslash;gefelt
+     * @return et s&oslash;gefelt
+     */
     private JTextField createSearchBar() {
         JTextField searchbar = new JTextField(query);
         searchbar.setPreferredSize(new Dimension(200, 20));
         return searchbar;
     }
 
+    /**
+     * Generer en s&oslash;ge knap
+     * @return Knap til at klikke s&oslash;g p&aring;
+     */
     private JButton createSearchButton() {
         JButton searchButton = new JButton("Search");
         searchButton.setPreferredSize(new Dimension(100, 20));
@@ -119,13 +155,20 @@ public class FrontPageView extends BaseView{
 
     /**
      * Updaterer hele panelet ud fra standard parameter
+     * @return JScrollPane med indholdet fra s&oslash;gningen
      */
     private JScrollPane updateContentContainer(){
         return updateContentContainer(preferredMediaType,preferredGenre, getMinimumRating(),query);
     }
 
     /**
-     * Updaterer containeren af medier baseret på den string af karakterer man søger efter og ønskede minimum rating
+     *
+     * Updaterer containeren af medier baseret p&aring; den string af karakterer man s&oslash;ger efter og &oslash;nskede minimum rating
+     * @param mediaTypeString = Typen mediet skal v&aelig;re
+     * @param genre = Genren mediet skal have
+     * @param minimumRating = Den mindste rating mediet skal have
+     * @param query = S&oslash;gefeltet
+     * @return en JScrollPane med indholdet fra s&oslash;gningen
      */
     private JScrollPane updateContentContainer(String mediaTypeString, String genre, double minimumRating, String query){
         JPanel panel = new JPanel();
@@ -136,6 +179,10 @@ public class FrontPageView extends BaseView{
         return scrollPane;
     }
 
+    /**
+     * Getter metode til at f&aring; rating uden "+"
+     * @return Ratingen der skal s&oslash;ges med
+     */
     private double getMinimumRating(){
 
         double minimumRating;

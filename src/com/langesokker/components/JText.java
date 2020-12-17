@@ -10,8 +10,8 @@ public class JText extends JLabel {
     Color color;
 
     /**
-     * Standard konstruktør for JText
-     * @param text ønskede text
+     * Standard konstrukt&oslash;r for JText
+     * @param text &oslash;nskede text
      */
     public JText(String text){
         super(text);
@@ -19,9 +19,9 @@ public class JText extends JLabel {
     }
 
     /**
-     * Overloaded konstruktør
-     * @param text ønskede tekst
-     * @param color farve på teksten
+     * Overloaded konstrukt&oslash;r
+     * @param text &oslash;nskede tekst
+     * @param color farve p&aring; teksten
      */
     public JText(String text, Color color){
         this(text);
@@ -29,9 +29,9 @@ public class JText extends JLabel {
     }
 
     /**
-     * Overloaded konstruktør
-     * @param text ønskede tekst
-     * @param fontSize størrelse på teksten
+     * Overloaded konstrukt&oslash;r
+     * @param text &oslash;nskede tekst
+     * @param fontSize st&oslash;rrelse p&aring; teksten
      */
     public JText(String text, int fontSize) {
         super(text);
@@ -40,10 +40,10 @@ public class JText extends JLabel {
     }
 
     /**
-     * Overloaded konstruktør
-     * @param text ønskede tekst
-     * @param fontSize størrelse på tekst
-     * @param color farve på tekst
+     * Overloaded konstrukt&oslash;r
+     * @param text &oslash;nskede tekst
+     * @param fontSize st&oslash;rrelse p&aring; tekst
+     * @param color farve p&aring; tekst
      */
     public JText(String text, int fontSize, Color color){
         this(text, fontSize);
@@ -51,10 +51,10 @@ public class JText extends JLabel {
     }
 
     /**
-     * Overloaded konstruktør
-     * @param text ønskede tekst
-     * @param fontSize størrelse på teksten
-     * @param isBold om teksten skal være fed
+     * Overloaded konstrukt&oslash;r
+     * @param text &oslash;nskede tekst
+     * @param fontSize st&oslash;rrelse p&aring; teksten
+     * @param isBold om teksten skal v&aelig;re fed
      */
     public JText(String text, int fontSize, boolean isBold){
         this(text, fontSize);
@@ -62,17 +62,21 @@ public class JText extends JLabel {
     }
 
     /**
-     * Overloaded konstruktør
-     * @param text ønskede tekst
-     * @param fontSize størrelse på tekst
-     * @param isBold om teksten skal være fed
-     * @param color farve på tekst
+     * Overloaded konstrukt&oslash;r
+     * @param text &oslash;nskede tekst
+     * @param fontSize st&oslash;rrelse p&aring; tekst
+     * @param isBold om teksten skal v&aelig;re fed
+     * @param color farve p&aring; tekst
      */
     public JText(String text, int fontSize, boolean isBold,  Color color){
         this(text, fontSize, isBold);
         this.color = color;
     }
 
+    /**
+     *
+     * @return font st&oslash;rrelsen
+     */
     public int getFontSize() {
         return fontSize;
     }

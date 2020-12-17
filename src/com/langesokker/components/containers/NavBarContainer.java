@@ -15,6 +15,10 @@ public class NavBarContainer extends JPanel{
     private final GUIController guiController = GUIController.getInstance();
 
 
+    /**
+     * Konstruk&oslash;r til NavBarContainer
+     * @param centerNav = omr&aring;det i midten af navbaren. For eksempel s&oslash;ge felt
+     */
     public NavBarContainer(Container centerNav) {
         this.setLayout(new BorderLayout());
         this.setBackground(Colors.PRIMARY_DARK.getColor());
@@ -34,6 +38,10 @@ public class NavBarContainer extends JPanel{
         this.add(rightContainer, BorderLayout.EAST);
     }
 
+    /**
+     * Hj&aelig;lpe metode til at f&aring; genereret en knap
+     * @return JButton
+     */
     private JButton createMyListButton() {
         JButton myListButton = new JButton("My list");
         myListButton.addActionListener(e -> {
@@ -43,6 +51,10 @@ public class NavBarContainer extends JPanel{
         return myListButton;
     }
 
+    /**
+     * Hj&aelig;lpe metode til at f&aring; genereret en background
+     * @return Container
+     */
     private JComboBox<User> createUserBox() {
         JComboBox<User> userBox = new JComboBox<>(UserController.getInstance().getUserArray());
         userBox.setSelectedItem(userController.getCurrentUser());
@@ -53,6 +65,10 @@ public class NavBarContainer extends JPanel{
         return userBox;
     }
 
+    /**
+     * Hj&aelig;lpe metode til at f&aring; genereret en hjem knap
+     * @return JButton
+     */
     private JButton createHomeButton() {
         JButton homeButton = new JButton("Home");
         homeButton.addActionListener(e -> {
