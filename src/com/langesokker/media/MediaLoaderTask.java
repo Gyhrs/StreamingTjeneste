@@ -4,6 +4,7 @@ import com.langesokker.components.ErrorPopup;
 import com.langesokker.components.containers.MediaItemContainer;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.utils.Colors;
+import com.langesokker.views.BaseView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,14 +23,21 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
     private final double minimumRating;
     private final JPanel panel;
     private int item = 0;
+    private String errorMessage = "The search gave no results";
+    private final BaseView currentView;
 
-    public MediaLoaderTask(JPanel panel, Map<SupportedMediaTypes, List<Media>> availableMedia, String mediaTypeString, String genre, double minimumRating, String query){
+    public MediaLoaderTask(BaseView currentView, JPanel panel, Map<SupportedMediaTypes, List<Media>> availableMedia){
+        this(currentView, panel, availableMedia, "","", 0D, "");
+    }
+
+    public MediaLoaderTask(BaseView currentView, JPanel panel, Map<SupportedMediaTypes, List<Media>> availableMedia, String mediaTypeString, String genre, double minimumRating, String query){
         this.availableMedia = availableMedia;
         this.mediaTypeString = mediaTypeString;
         this.genre = genre;
         this.query = query;
         this.minimumRating = minimumRating;
 
+        this.currentView = currentView;
         this.panel = panel;
         this.panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         this.panel.setBackground(Colors.SECONDARY_DARK.getColor());
@@ -41,8 +49,12 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
         super.done();
         guiController.getFrame().setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         if(item == 0){
-            new ErrorPopup(new JFrame(), "Nothing found", "The search gave no results", false);
+            new ErrorPopup(new JFrame(), "Nothing found", errorMessage, false);
         }
+    }
+
+    public void setErrorMessage(String message){
+        this.errorMessage = message;
     }
 
     @Override
@@ -83,7 +95,7 @@ public class MediaLoaderTask extends SwingWorker<JPanel, Container> {
 
                 }
 
-                rowContainer.add(new MediaItemContainer(media));
+                rowContainer.add(new MediaItemContainer(media, currentView));
                 item++;
 
             }

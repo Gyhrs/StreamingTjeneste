@@ -136,7 +136,7 @@ public class FrontPageView extends BaseView{
         JPanel panel = new JPanel();
         JScrollPane scrollPane = new JScrollPane(panel, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.getVerticalScrollBar().setUnitIncrement(15);
-        MediaLoaderTask task = new MediaLoaderTask(panel, mediaController.getMediaMap(), mediaTypeString, genre, minimumRating, query);
+        MediaLoaderTask task = new MediaLoaderTask(this, panel, mediaController.getMediaMap(), mediaTypeString, genre, minimumRating, query);
         task.execute();
         return scrollPane;
     }
