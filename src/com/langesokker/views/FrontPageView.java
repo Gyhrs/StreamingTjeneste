@@ -18,12 +18,7 @@ public class FrontPageView extends BaseView{
     private String preferredMinimumRatingString = "0.0+";
 
     public FrontPageView(JFrame frame) {
-        super(frame);
-    }
-
-    @Override
-    public String getViewName() {
-        return "Home";
+        super(frame, "Home");
     }
 
     public void resetSearch(){

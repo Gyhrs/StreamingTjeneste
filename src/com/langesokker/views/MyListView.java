@@ -21,12 +21,7 @@ public class MyListView extends BaseView {
     private final UserController userController = UserController.getInstance();
 
     public MyListView(JFrame frame) {
-        super(frame);
-    }
-
-    @Override
-    public String getViewName() {
-        return "My list";
+        super(frame, "My list");
     }
 
     /**

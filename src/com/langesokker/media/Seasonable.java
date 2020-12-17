@@ -6,8 +6,6 @@ public interface Seasonable {
 
     Map<Integer, Integer> getSeasons();
 
-    void setSeasons(Map<Integer, Integer> seasons);
-
     int getEndDate();
 
     boolean isStillAiring();

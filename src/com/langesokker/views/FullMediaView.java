@@ -38,19 +38,11 @@ public class FullMediaView extends BaseView {
      * @param previousView = Siden brugeren kom fra. (Nullable)
      */
     public FullMediaView(JFrame frame, Media media, BaseView previousView) {
-        super(frame);
+        super(frame, media.getName());
         this.media = media;
         this.previousView = previousView;
     }
 
-    /**
-     * Returnere title navnet
-     * @return View name
-     */
-    @Override
-    public String getViewName() {
-        return media.getName();
-    }
 
     /**
      *

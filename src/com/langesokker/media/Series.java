@@ -18,10 +18,6 @@ public class Series extends Media implements Seasonable{
     public Map<Integer, Integer> getSeasons() {
         return seasons;
     }
-    @Override
-    public void setSeasons(Map<Integer, Integer> seasons) {
-        this.seasons = seasons;
-    }
 
     @Override
     public int getEndDate() {
