@@ -33,3 +33,8 @@ For at se dokumentation / JavaDocs: Åben "JavaDocs" mappen og dobbeltklik på "
 5. Vælg en ønsket mindste beddømmelse
 6. Skriv søgeord i søgefeltet
 7. Tryk på "Search"
+
+### For at navigere mellem de forskellige vinduer
+"Home" knappen: Går til forsiden
+"Back" knappen: Går tilbage til den forrige side, med evt. søgeresultater.
+"My list": Går til My List siden
