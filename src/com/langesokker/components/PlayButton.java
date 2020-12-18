@@ -1,5 +1,6 @@
 package com.langesokker.components;
 
+import com.langesokker.exceptions.ImageNotFoundException;
 import com.langesokker.utils.ImageUtils;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ public class PlayButton extends JButton{
      * Konstruktør til PlayButton
      * Dette er en hjælpe klasse for at gøre koden mere overskuelig
      */
-    public PlayButton(){
+    public PlayButton() throws ImageNotFoundException {
         this.setBorder(new EmptyBorder(0,0,0,0));
         this.setBorderPainted(false);
         this.setContentAreaFilled(false);

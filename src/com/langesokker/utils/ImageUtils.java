@@ -1,5 +1,7 @@
 package com.langesokker.utils;
 
+import com.langesokker.exceptions.ImageNotFoundException;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -16,16 +18,17 @@ public class ImageUtils {
      * @param path Den lokale sti fra packagen
      * @return BufferedImage den loaded billede
      */
-    public static BufferedImage getImage(String path){
-        String basePath = "com/langesokker/";
-        InputStream is = ImageUtils.class.getClassLoader().getResourceAsStream(basePath + path);
-        if(is == null) return null;
+    public static BufferedImage getImage(String path) throws ImageNotFoundException {
+        String fullPath = "com/langesokker/" + path;
+        InputStream is = ImageUtils.class.getClassLoader().getResourceAsStream(fullPath);
+        if(is == null){
+            throw new ImageNotFoundException("InputStream is null", fullPath);
+        }
         try {
             return ImageIO.read(is);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ImageNotFoundException("Image not found", fullPath);
         }
-        return null;
     }
 
     /**

@@ -1,5 +1,6 @@
 package com.langesokker.views;
 
+import com.langesokker.components.ErrorPopup;
 import com.langesokker.components.JText;
 import com.langesokker.components.PlayButton;
 import com.langesokker.components.containers.EpisodeSelectorContainer;
@@ -9,6 +10,7 @@ import com.langesokker.components.containers.RatingContainer;
 import com.langesokker.controllers.GUIController;
 import com.langesokker.controllers.MediaController;
 import com.langesokker.controllers.UserController;
+import com.langesokker.exceptions.ImageNotFoundException;
 import com.langesokker.media.Media;
 import com.langesokker.media.Seasonable;
 import com.langesokker.models.User;
@@ -122,8 +124,13 @@ public class FullMediaView extends BaseView {
         c.gridy = 1;
         c.insets = new Insets(20, 20, 20, 20);
         /* Add a play button */
-        JButton playButton = new PlayButton();
-        imagePanel.add(playButton, c);
+        JButton playButton;
+        try {
+            playButton = new PlayButton();
+            imagePanel.add(playButton, c);
+        } catch (ImageNotFoundException e) {
+            new ErrorPopup(new JFrame(), "Error occurred", "Could not load play button correctly", false);
+        }
 
         c.gridy = 2;
         /* Add season/episode select if possible */

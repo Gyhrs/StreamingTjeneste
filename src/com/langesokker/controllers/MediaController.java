@@ -1,6 +1,7 @@
 package com.langesokker.controllers;
 
 import com.langesokker.components.ErrorPopup;
+import com.langesokker.exceptions.ImageNotFoundException;
 import com.langesokker.media.Media;
 import com.langesokker.media.SupportedMediaTypes;
 import com.langesokker.utils.ImageUtils;
@@ -17,6 +18,7 @@ public class MediaController {
     private static MediaController instance;
     private final Map<SupportedMediaTypes, List<Media>> mediaMap;
     private final List<String> knownGenres;
+    private BufferedImage thumbnailNotFound;
 
     /**
      * Konstrukt&oslash;r af MediaController
@@ -25,6 +27,12 @@ public class MediaController {
         this.mediaMap = new HashMap<>();
         this.knownGenres = new ArrayList<>();
         this.knownGenres.add("All genres");
+
+        try{
+            thumbnailNotFound = ImageUtils.getImage("assets/no-image.png");
+        }catch(ImageNotFoundException e){
+            thumbnailNotFound = null;
+        }
     }
 
     /**
@@ -76,7 +84,13 @@ public class MediaController {
      * @return = BufferedImage ud fra /data/images/[mediaType]/[mediaNavn].jpg Kan returnere null hvis intet billed findes.
      */
     public BufferedImage getMediaImage(Media media) {
-        return ImageUtils.getImage("data/images/" + media.getType().getImageFolderName() + "/" + media.getName() + ".jpg");
+        try{
+
+            return ImageUtils.getImage("data/images/" + media.getType().getImageFolderName() + "/" + media.getName() + ".jpg");
+        }catch(ImageNotFoundException e){
+            System.out.println(e.getMessage() + " at " + e.getPath());
+            return thumbnailNotFound;
+        }
     }
 
     /**

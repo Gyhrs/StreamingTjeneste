@@ -1,6 +1,7 @@
 package com.langesokker.components.containers;
 
 import com.langesokker.components.JText;
+import com.langesokker.exceptions.ImageNotFoundException;
 import com.langesokker.media.Media;
 import com.langesokker.utils.Colors;
 import com.langesokker.utils.ImageUtils;
@@ -32,7 +33,13 @@ public class RatingContainer extends JComponent {
         JText ratingText = new JText(((!frontPage ? "Rating: " : "") + media.getRating()), 15, true, Colors.WHITE.getColor());
         this.add(ratingText);
 
-        BufferedImage ratingIcon = ImageUtils.getImage("assets/star.png");
+        //Only show the star if loaded correctly otherwise the star is not necessary for the user experience
+        BufferedImage ratingIcon = null;
+        try{
+            ratingIcon = ImageUtils.getImage("assets/star.png");
+        }catch(ImageNotFoundException e){
+            System.out.println("Could not load rating star at " + e.getPath()); //Not necessary for the user to see
+        }
         if(ratingIcon != null){
             ratingIcon = ImageUtils.resize(ratingIcon, ratingText.getFontSize(), ratingText.getFontSize());
             this.add(new JLabel(new ImageIcon(ratingIcon)));
