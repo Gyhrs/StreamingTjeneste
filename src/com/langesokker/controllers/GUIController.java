@@ -44,11 +44,11 @@ public class GUIController {
      * Laver en base-st&oslash;rrelse for GUI'ens frame
      */
     public void setupGUI(){
-        frame.setMinimumSize(new Dimension(500, 300));
+        frame.setMinimumSize(new Dimension(900, 600));
         frame.setPreferredSize(new Dimension(1920, 1000));
-
+        frame.setLocationRelativeTo(null);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.add(frontPage.getContainer());
-
     }
 
     /**
