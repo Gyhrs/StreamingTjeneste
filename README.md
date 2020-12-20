@@ -4,7 +4,7 @@ For at åbne programmet: Dobbeltklik på "StreamingTjeneste.jar"
 
 For at se rapporten: Åben "rapport.pdf"
 
-For at se Source Code: Åben "Sorce Code" Mappen
+For at se Source Code: Åben "Source Code" Mappen
 
 For at se dokumentation / JavaDocs: Åben "JavaDocs" mappen og dobbeltklik på "index.html"
 
@@ -30,7 +30,7 @@ For at se dokumentation / JavaDocs: Åben "JavaDocs" mappen og dobbeltklik på "
 2. Find menu punkterne i midten af navigationsbaren på toppen af programmet
 3. Vælg en ønsket medietype
 4. Vælg en ønsket genre
-5. Vælg en ønsket mindste beddømmelse
+5. Vælg en ønsket mindste bedømmelse
 6. Skriv søgeord i søgefeltet
 7. Tryk på "Search"
 
